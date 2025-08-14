@@ -96,12 +96,12 @@ const MainPage = () => {
   <>
     <section id="hero" className="hero-section">
       <video autoPlay loop muted playsInline className="hero-video">
-        <source src="/hero_video.mp4" type="video/mp4" />
+        <source src={process.env.PUBLIC_URL + "/hero_video.mp4"} type="video/mp4" />
       </video>
       <div className="hero-overlay"></div>
       <div className="hero-content">
         <div className="hero-profile-image-container">
-          <img src="https://www.basic-fit.com/dw/image/v2/BDFP_PRD/on/demandware.static/-/Sites/default/dw21ebcc5a/trainerImages/00PR6000000UxSUMA0.png?sw=368&q=80" alt="Photo de Coach Sam" />
+          <img src={process.env.PUBLIC_URL + "/images/profile_coach_sam.png"} alt="Photo de Coach Sam" />
         </div>
         <h1>Transformez Votre Vie, Pas Seulement Votre Corps.</h1>
         <p>Rejoignez-moi et devenez la meilleure version de vous-même.</p>
@@ -149,7 +149,8 @@ const MainPage = () => {
       <div className="testimonial-cards">
         <AnimatedTestimonialCard
           animationDirection="from-left"
-          imgSrc="/grandingo.jpg"
+
+          imgSrc={process.env.PUBLIC_URL + "/grandingo.jpg"}
           altText="Grandingo"
           quote="J'avais tout essayé pour perdre du poids, sans succès. Avec Sam, j'ai perdu 15 kg en 2 mois et, surtout, j'ai appris à aimer le sport. Son approche bienveillante a tout changé !"
           author="Grandingo, -15 kg"
@@ -163,7 +164,7 @@ const MainPage = () => {
         />
         <AnimatedTestimonialCard
           animationDirection="from-left"
-          imgSrc="/ma_photo_de_profil.jpg"
+          imgSrc={process.env.PUBLIC_URL + "/ma_photo_de_profil.jpg"}
           altText="Mohamed"
           quote="En tant que coureur, je devais améliorer mon endurance pour un marathon. Sam a structuré ma préparation et m'a permis de passer sous la barre des 3h30. Inestimable."
           author="Mohamed, Marathonien"
@@ -252,7 +253,7 @@ function App() {
   };
 
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <div className="App">
         <header className={`App-header ${scrolled ? 'scrolled' : ''}`}>
           <nav className={`main-nav ${menuOpen ? 'is-open' : ''}`}>
@@ -265,7 +266,7 @@ function App() {
               <li><Link to="/outils" onClick={toggleMenu}>Outils</Link></li>
               <li><Link to="/questionnaire" onClick={toggleMenu}>Questionnaire</Link></li>
               <li><Link to="/contact" onClick={toggleMenu}>Contact</Link></li> {/* Added Contact link */}
-              <li><Link to="/"><img src="/images/logo.png" alt="Coach Sam Logo" className="nav-logo" /></Link></li>
+              <li><Link to="/"><img src={process.env.PUBLIC_URL + "/images/logo.png"} alt="Coach Sam Logo" className="nav-logo" /></Link></li>
             </ul>
           </nav>
           <button className="hamburger-menu" onClick={toggleMenu}>

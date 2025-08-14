@@ -546,45 +546,81 @@ h2 {
   }
 
   .hero-content h1 {
-    font-size: 3rem;
+    font-size: 3rem; /* Adjusted for 768px */
   }
 
   .hero-content p {
-    font-size: 1.2rem;
+    font-size: 1.2rem; /* Adjusted for 768px */
   }
 
   h2 {
-    font-size: 2.5rem;
+    font-size: 2.5rem; /* Adjusted for 768px */
   }
 
   .contact-grid {
     grid-template-columns: 1fr; /* Stack contact form and info */
   }
+
+  /* General section padding adjustment for smaller screens */
+  section {
+    padding: 3rem 1rem; /* Reduced padding */
+  }
+
+  /* Hero section adjustments */
+  .hero-profile-image-container {
+    width: 150px; /* Smaller profile image */
+    height: 150px;
+  }
+
+  /* Services grid adjustments */
+  .services-grid {
+    gap: 20px; /* Slightly smaller gap */
+  }
+
+  .service-card {
+    flex-basis: 100%; /* Full width on smaller screens */
+    max-width: 350px; /* Max width for cards to prevent stretching too much */
+  }
+
+  /* Testimonials adjustments */
+  .testimonial-cards {
+    grid-template-columns: 1fr; /* Stack testimonials */
+    gap: 20px;
+  }
 }
 
-/* --- Back to Home Button --- */
-.back-to-home-button {
-  display: inline-block;
-  background-color: var(--main-black);
-  color: var(--main-white);
-  border: none;
-  padding: 10px 20px;
-  font-size: 1rem;
-  font-weight: bold;
-  text-decoration: none;
-  border-radius: 50px;
-  transition: background-color 0.3s, transform 0.3s;
-  margin-bottom: 20px; /* Add some space below the button */
-}
+@media (max-width: 480px) {
+  .hero-content h1 {
+    font-size: 2.2rem; /* Even smaller for very narrow screens */
+  }
 
-.back-to-home-button:hover {
-  background-color: var(--main-red);
-  transform: scale(1.05);
-}
+  .hero-content p {
+    font-size: 1rem;
+  }
 
-footer {
-  background-color: #c5963f;
-  color: #000;
-  text-align: center;
-  padding: 1.5rem 1rem;
+  h2 {
+    font-size: 2rem; /* Even smaller for very narrow screens */
+  }
+
+  .cta-button {
+    padding: 12px 25px;
+    font-size: 1rem;
+  }
+
+  .service-card h3 {
+    font-size: 1.5rem;
+  }
+
+  .testimonial-card blockquote {
+    font-size: 0.9rem;
+  }
+
+  .info-card {
+    flex-direction: column; /* Stack icon and text in info cards */
+    text-align: center;
+  }
+
+  .info-card i {
+    margin-bottom: 10px;
+  }
 }
