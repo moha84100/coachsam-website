@@ -1,0 +1,144 @@
+.avant-apres-container {
+  padding: 4rem 1rem;
+  text-align: center;
+  background-color: #000; /* Fond noir */
+  color: #c5963f; /* Texte doré */
+  min-height: 100vh; /* S'assurer que le conteneur prend toute la hauteur */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.avant-apres-container h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.avant-apres-container p {
+  font-size: 1.2rem;
+  color: #c5963f; /* Texte doré */
+  margin-bottom: 3rem;
+}
+
+.carousel-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1300px; /* Augmenté pour permettre aux images de s'agrandir */
+  margin: 0 auto;
+  position: relative;
+}
+
+.carousel-arrow {
+  background: none; /* Pas de fond pour les flèches */
+  border: none;
+  color: #fff;
+  font-size: 3rem; /* Plus grande taille pour les flèches */
+  padding: 0 20px; /* Plus de rembourrage */
+  cursor: pointer;
+  z-index: 10;
+  position: static; /* Retirer le positionnement absolu */
+  transform: none; /* Retirer la transformation */
+  transition: color 0.3s;
+}
+
+.carousel-arrow:hover {
+  color: #c5963f; /* Couleur dorée au survol */
+  background: none;
+}
+
+.left-arrow {
+  margin-right: 20px; /* Espacement entre la flèche et l'image */
+}
+
+.right-arrow {
+  margin-left: 20px; /* Espacement entre la flèche et l'image */
+}
+
+.image-card {
+  background-color: #000; /* Fond noir pour la carte */
+  border: 5px solid #c5963f; /* Cadre doré */
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Ombre plus foncée */
+  width: 100%; /* L'image prend toute la largeur de la carte */
+  max-width: 1711.5px; /* Division de la taille de l'image par 2 */
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out; /* Animation pour la carte */
+  position: relative; /* Ajouté pour positionner le commentaire */
+}
+
+.avant-apres-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(50px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+.avant-apres-image.fade-slide-in {
+  animation: fadeSlideIn 1.2s ease-in-out forwards;
+}
+
+.image-card:hover {
+  transform: scale(1.03); /* Léger zoom */
+  box-shadow: 0 0 30px rgba(197, 150, 63, 0.8); /* Ombre lumineuse dorée */
+}
+
+.testimonial-bubble {
+  background-color: #c5963f; /* Couleur de la bulle */
+  color: #000; /* Couleur du texte dans la bulle */
+  padding: 20px 30px;
+  border-radius: 15px;
+  margin-top: 50px; /* Espace au-dessus de la bulle */
+  width: 80%;
+  max-width: 600px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  position: relative;
+  font-style: italic;
+  font-size: 1.1rem;
+  opacity: 0;
+  animation: fadeInComment 0.5s forwards;
+}
+
+.testimonial-bubble::before {
+  content: '';
+}
+
+.testimonial-bubble::after {
+  content: '';
+}
+
+.testimonial-bubble .comment-text {
+  margin: 0;
+  padding: 0;
+  color: #000; /* Texte en noir */
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes fadeInComment {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

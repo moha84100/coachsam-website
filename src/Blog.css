@@ -1,0 +1,132 @@
+.blog-container {
+  padding: 4rem 1rem;
+  text-align: center;
+}
+
+.filter-buttons {
+  margin-bottom: 2rem;
+}
+
+.filter-buttons button {
+  background: none;
+  border: 1px solid var(--secondary-gray);
+  color: var(--main-black);
+  padding: 10px 20px;
+  margin: 0 5px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.filter-buttons button:hover {
+  background-color: var(--light-bg);
+}
+
+  .filter-buttons button.active {
+  .filter-buttons button.active {
+  .filter-buttons button.active {
+  background-color: var(--main-red);
+  color: var(--main-white);
+  border-color: var(--main-red);
+}
+}
+}
+
+
+.articles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 2rem;
+}
+
+.article-card {
+  background: var(--main-white);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  text-align: left;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.article-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.article-category {
+  display: block;
+  background-color: var(--main-red);
+  color: var(--main-white);
+  padding: 8px 15px; /* Increased padding */
+  border-radius: 20px; /* More rounded corners */
+  font-size: 0.9rem; /* Slightly larger font */
+  margin: 0 auto 15px auto; /* Center and add more bottom margin */
+  width: fit-content; /* Shrink to content width */
+}
+
+.article-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.article-card p {
+  color: var(--secondary-gray);
+  flex-grow: 1; /* Ensures cards have same height in a row */
+}
+
+.read-more {
+  background: var(--main-black);
+  color: var(--main-white);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  margin-top: 1rem;
+}
+
+.article-card:hover .read-more {
+  background-color: var(--main-red);
+}
+
+/* --- Modal Styles --- */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--light-bg);
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.close-modal-btn {
+  background: none;
+  border: none;
+  font-size: 2.5rem;
+  cursor: pointer;
+  color: var(--secondary-gray);
+  transition: color 0.3s;
+}
+
+.close-modal-btn:hover {
+  color: var(--main-black);
+}
+
+.modal-content h3 {
+  color: var(--main-red);
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.modal-content p {
+  line-height: 1.8;
+  font-size: 1.1rem;
+}

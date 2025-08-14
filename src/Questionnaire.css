@@ -1,0 +1,65 @@
+.questionnaire-container {
+  padding: 8rem 2rem 4rem;
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: var(--light-bg);
+  color: var(--main-black);
+}
+
+.questionnaire-form fieldset {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 2rem;
+}
+
+.questionnaire-form legend {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--main-red);
+  padding: 0 10px;
+}
+
+.questionnaire-form label {
+  display: block;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.questionnaire-form input[type="text"],
+.questionnaire-form input[type="number"],
+.questionnaire-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 5px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.questionnaire-form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.questionnaire-form input[type="checkbox"],
+.questionnaire-form input[type="radio"] {
+  margin-right: 10px;
+}
+
+.submit-btn {
+  background-color: var(--main-red);
+  color: var(--main-white);
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 50px;
+  display: block;
+  margin: 2rem auto 0;
+  transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: var(--main-red-hover);
+}
