@@ -80,3 +80,20 @@
   margin-top: 1.5rem;
   color: var(--secondary-gray);
 }
+
+.back-to-home-button {
+  display: inline-block;
+  margin-bottom: 2rem;
+  padding: 10px 25px;
+  background-color: var(--main-black);
+  color: var(--main-white);
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.back-to-home-button:hover {
+  background-color: var(--main-red);
+  transform: scale(1.05);
+}

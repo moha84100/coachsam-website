@@ -1,0 +1,90 @@
+/* Auth.css */
+
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding: 2rem;
+  background: linear-gradient(135deg, var(--main-red) 0%, var(--main-black) 100%);
+}
+
+.auth-logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1.5rem;
+  border: 3px solid var(--main-red);
+}
+
+.auth-form {
+  background: var(--main-white);
+  padding: 3rem;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+.auth-form h2 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: var(--main-black);
+  text-transform: uppercase;
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.auth-form input:focus {
+  outline: none;
+  border-color: var(--main-red);
+  box-shadow: 0 0 0 3px rgba(197, 150, 63, 0.2);
+}
+
+.auth-form button {
+  background-color: var(--main-red);
+  color: var(--main-white);
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 50px;
+  transition: background-color 0.3s, transform 0.3s;
+  width: 100%;
+  text-transform: uppercase;
+}
+
+.auth-form button:hover {
+  background-color: var(--main-red-hover);
+  transform: scale(1.05);
+}
+
+.auth-form p {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: var(--secondary-gray);
+}
+
+.auth-form p a {
+  color: var(--main-red);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.auth-form p a:hover {
+  text-decoration: underline;
+}

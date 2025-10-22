@@ -68,9 +68,9 @@ function Contact() {
               <p>07 67 61 44 46</p>
             </div>
             <div className="social-links-contact">
-              <a href="#"><i className="fab fa-facebook-f"></i></a>
-              <a href="#"><i className="fab fa-instagram"></i></a>
-              <a href="#"><i className="fab fa-linkedin-in"></i></a>
+              <a href="https://www.facebook.com/p/Samuel-Wehbe-100093540156811/" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f"></i></a>
+              <a href="https://www.instagram.com/samuelwehbe/?igsh=MXJ4eHVudjJ3anl0aw%3D%3D" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i></a>
+              <a href="https://www.linkedin.com/in/mohamed-ech-chkoubi-a15954227/?originalSubdomain=fr" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin-in"></i></a>
             </div>
           </div>
         </div>

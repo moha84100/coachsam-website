@@ -19,6 +19,12 @@ body {
   scroll-behavior: smooth;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+  display: block; /* Remove extra space below images */
+}
+
 /* --- Header & Navigation --- */
 .App-header {
   background-color: transparent;
@@ -259,6 +265,7 @@ h2 {
   font-weight: 700;
   font-size: 1.8rem;
   margin-bottom: 1rem;
+  letter-spacing: 1px;
 }
 
 .service-button {
@@ -315,12 +322,35 @@ h2 {
   background-color: var(--light-bg);
 }
 
+.testimonial-carousel {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+.carousel-arrow {
+    background: none;
+    border: none;
+    font-size: 3rem;
+    color: var(--main-red);
+    cursor: pointer;
+    padding: 0 20px;
+    transition: transform 0.3s;
+}
+
+.carousel-arrow:hover {
+    transform: scale(1.2);
+}
+
 .testimonial-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 30px;
   max-width: 1200px;
   margin: 0 auto;
+  overflow: hidden;
 }
 
 .testimonial-card {
@@ -514,6 +544,10 @@ h2 {
 }
 
 @media (max-width: 768px) {
+  .App-header {
+    padding: 0.5rem 1rem; /* Plus compact sur mobile */
+  }
+
   .main-nav {
     display: none; /* Hide nav by default on mobile */
   }
@@ -543,6 +577,16 @@ h2 {
   .main-nav.is-open ul a {
     font-size: 2rem;
     text-shadow: none;
+    color: var(--main-white); /* Ensure links are visible on dark overlay */
+  }
+
+  .nav-logo {
+    width: 40px; /* Smaller logo on mobile */
+    height: 40px;
+    margin-left: 0; /* Remove left margin */
+    position: absolute; /* Position relative to header */
+    top: 10px;
+    left: 10px;
   }
 
   .hero-content h1 {
@@ -623,4 +667,83 @@ h2 {
   .info-card i {
     margin-bottom: 10px;
   }
+}
+
+/* --- Footer --- */
+footer {
+  background-color: var(--main-black);
+  color: var(--main-white);
+  padding: 4rem 2rem 1rem;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto 3rem auto;
+}
+
+.footer-logo img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--main-red);
+  margin-bottom: 1rem;
+}
+
+.footer-logo p {
+  font-size: 0.9rem;
+  color: var(--secondary-gray);
+  max-width: 250px;
+}
+
+.footer-links h4, .footer-social h4 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  color: var(--main-red);
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.8rem;
+}
+
+.footer-links a {
+  color: var(--main-white);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover {
+  color: var(--main-red);
+}
+
+.social-links a {
+  color: var(--main-white);
+  font-size: 1.5rem;
+  margin-right: 1.5rem;
+  transition: color 0.3s, transform 0.3s;
+  display: inline-block;
+}
+
+.social-links a:hover {
+  color: var(--main-red);
+  transform: scale(1.2);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid var(--secondary-gray);
+  font-size: 0.9rem;
+  color: var(--secondary-gray);
 }

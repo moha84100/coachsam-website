@@ -1,0 +1,70 @@
+export const exerciseData = {
+  "Jambes": [
+    { name: "Legs extension", videoUrl: "https://youtube.com/shorts/JPP4A_BcUx8?si=WF07l0cmDBulbzgu" },
+    { name: "Legs curl assis", videoUrl: "https://youtube.com/shorts/aWbSqsBIXiU?si=XMXamzEnsrjJeeCU" },
+    { name: "Legs curl allongé", videoUrl: "https://youtube.com/shorts/0jxpicak9mg?si=hojiWV3CwPp6wdgB" },
+    { name: "Machine abduction", videoUrl: "https://youtube.com/shorts/GwfBFHRJkwQ?si=-zO-RGfjPgoRMs3j" },
+    { name: "Machine adduction", videoUrl: "https://youtube.com/shorts/bNL8vUyRP68?si=8FJZbpa6yVorfWqn" },
+    { name: "Press incliné", videoUrl: "https://youtube.com/shorts/ehUKQEM8nwA?si=CARPnhdwt8JtuR8y" },
+    { name: "Press horizontal", videoUrl: "https://youtube.com/shorts/yNoPltAwIKI?si=I1MYfhYdZhXMGcBV" },
+    { name: "Squat à la smith", videoUrl: "https://youtube.com/shorts/ess30psZKig?si=4kNZ1LREawBfrqv7" },
+    { name: "Squat à la barre", videoUrl: "https://youtube.com/shorts/rwBxuJEri_s?si=XkOCNnxF0xoPrP02" },
+    { name: "Fentes bulgares", videoUrl: "https://youtube.com/shorts/RM0pahubYp0?si=Uwnzin-LsbCtzWVe" },
+    { name: "Goblet squat", videoUrl: "https://youtube.com/shorts/XCCtphV3da0?si=5kp5vvyqrTFmC5T2" },
+    { name: "Nordic curl", videoUrl: "https://youtube.com/shorts/Csq1F5eBld0?si=ZoF4xCGThvaUWkhJ" },
+    { name: "SDT jambes tendues", videoUrl: "https://youtube.com/shorts/GGILGAuOVrQ?si=2k7FDhHoSnP3IrxI" },
+    { name: "Sysy squat à genoux", videoUrl: "https://youtube.com/shorts/3hQy2QBbrRk?si=vXYPKqYPoBBP2jYa" },
+    { name: "Sysy squat debout", videoUrl: "https://youtube.com/shorts/HbUZ_4WhE78?si=C8_6XMqVmPFhqKJq" },
+    { name: "Fentes box", videoUrl: "https://youtube.com/shorts/Fk0McdJV5Xw?si=2nwCETdo2bSzOtk1" },
+    { name: "Hip thrust", videoUrl: "https://youtube.com/shorts/991jHWi06j0?si=5uNGiry8pthWhOoV" }
+  ],
+  "Dos": [
+    { name: "Tirage vertical neutre", videoUrl: "https://youtube.com/shorts/0SmUKTrJ1DY?si=fLbwTUY6lLyF3i65" },
+    { name: "Tirage horizontal trapèze", videoUrl: "https://youtube.com/shorts/p21AWG9qipo?si=n0zRmttW5t3xf2F4" },
+    { name: "Tirage vertical unilatéral", videoUrl: "https://youtube.com/shorts/0kxFZrBIhrc?si=Jze6ycxRoDljx3cS" },
+    { name: "Tirage horizontal large", videoUrl: "https://youtube.com/shorts/CEUlSndewG4?si=Q1fJzab19Cb5sZP4" },
+    { name: "Tirage horizontal neutre", videoUrl: "https://youtube.com/shorts/G2Wx7LI9Iuc?si=aoba2OuVqAw5kmr6" },
+    { name: "Tirage horizontal unilatéral", videoUrl: "https://youtube.com/shorts/46ft5GCnSIU?si=xEhhB6Rq-_wOTCdS" },
+    { name: "Élévation Y", videoUrl: "https://youtube.com/shorts/H6NSjWAGJ8c?si=Dp3RgHM6Qr3ouIBe" },
+    { name: "Face pull", videoUrl: "https://youtube.com/shorts/NSfReJi-1Bs?si=NN0rQJ5xnAwDk_g_" },
+    { name: "Traction", videoUrl: "https://youtube.com/shorts/mtKZxceRpXk?si=x1FI1a9_6DM7VTb5" },
+    { name: "Traction excentrique", videoUrl: "https://youtube.com/shorts/y_WcGpfJ3fg?si=ljj1rxJBQ4r9tbt3" },
+    { name: "Pull over", videoUrl: "https://youtube.com/shorts/BXd-nS37UvU?si=01SnbRgaJ1748zTV" }
+  ],
+  "Bras": [
+    { name: "Machine à dips", videoUrl: "https://youtube.com/shorts/O2pqENNsEUU?si=Qzgdr9Lie8Kh53yk" },
+    { name: "Extension triceps", videoUrl: "https://youtube.com/shorts/Sqpgd6OgDM0?si=XJadWKVSvjXXVqhy" },
+    { name: "Barre au front", videoUrl: "https://youtube.com/shorts/LtIF-rMauSk?si=lhgS0gxo0l6M3yk0" },
+    { name: "Barre au front PDC", videoUrl: "https://youtube.com/shorts/iiiiIYGvYgo?si=ynI0n9N1lhRwYU3H" },
+    { name: "Curl pupitre", videoUrl: "https://youtube.com/shorts/WDP2K1qAPGA?si=2DFLLqrz0WtU_IaE" },
+    { name: "Traction supination", videoUrl: "https://youtube.com/shorts/RpT-C_SJvCo?si=biTEWh7r1UmxyWy_" },
+    { name: "Traction australienne", videoUrl: "https://youtube.com/shorts/E8hKYhrHq6Q?si=VgKc4ftA2ZjXT6tM" },
+    { name: "Curl barre", videoUrl: "https://youtube.com/shorts/7_AjaZ0cvAg?si=Sc8CuksUKCnZtDgD" },
+    { name: "Curl incliné", videoUrl: "https://youtube.com/shorts/72pqN5yfrw4?si=S1VFxazeivSmokEK" },
+    { name: "Curl marteau", videoUrl: "https://youtube.com/shorts/8qc3CC6eeks?si=XTNuUcobcsOsDMwS" }
+  ],
+  "Pecs": [
+    { name: "Machine convergente Bas des Pec", videoUrl: "https://youtube.com/shorts/VtZULb0bVKA?si=hZktXYWt2XN9lV7l" },
+    { name: "Machine convergente haut des Pec", videoUrl: "https://youtube.com/shorts/TdQ3LumD1zw?si=bWaCa74TZVkY_TKh" },
+    { name: "Machine unilatéral pec", videoUrl: "https://youtube.com/shorts/unqMuOHrOr4?si=JyX30210PlO8qPSQ" },
+    { name: "Pec Deck", videoUrl: "https://youtube.com/shorts/E78GByPqNK0?si=LAXtrn9bVZyLwePY" },
+    { name: "Incliné smith", videoUrl: "https://youtube.com/shorts/G6T-QW6_6ho?si=Y_ijDdKahO5EgsoL" },
+    { name: "Dips", videoUrl: "https://youtube.com/shorts/xtNHtrLleFQ?si=syh9TIJI5vkuDFU0" },
+    { name: "DC smith", videoUrl: "https://youtube.com/shorts/xKz468PskBw?si=fWD72fl7hCCsV93o" },
+    { name: "DC machine", videoUrl: "https://youtube.com/shorts/X_Up2ASHl3E?si=YArLgx5kokeUgBHH" },
+    { name: "Pompes", videoUrl: "https://youtube.com/shorts/RlgdqxKVg54?si=dzkRQuwO9x2HL0bz" },
+    { name: "Haut de pecs poulie", videoUrl: "https://youtube.com/shorts/dwbq_ecrDao?si=feP0g7khhwMVf2Da" },
+    { name: "DC haltère", videoUrl: "https://youtube.com/shorts/Jhsvgp9SGwM?si=k2IiOkXh8TX4fpDb" },
+    { name: "DI haltère", videoUrl: "https://youtube.com/shorts/xJt7AWIwKTQ?si=IgvukDNJGtmVJAJ6" },
+    { name: "DM barre", videoUrl: "https://youtube.com/shorts/HGX9Y95uxsM?si=gWUY-A9uGsjhWpOg" }
+  ],
+  "Épaules": [
+    { name: "DM", videoUrl: "https://youtube.com/shorts/XIzfIAlBEWE?si=DF7YH2hFM3VE_XFQ" },
+    { name: "Pec deck a l’envers", videoUrl: "https://youtube.com/shorts/yNoPltAwIKI?si=I1MYfhYdZhXMGcBV" },
+    { name: "Élévation latérale", videoUrl: "https://youtube.com/shorts/pErtAkDlTSE?si=sHjK0XsrmNVlCG_h" },
+    { name: "DM haltère", videoUrl: "https://youtube.com/shorts/WkPotBiwW38?si=xcjYwZDC8kHQXH_N" },
+    { name: "Tirage arrière d’épaule", videoUrl: "https://youtube.com/shorts/cXakzjagdwk?si=veQY1MH46Glj3OkK" },
+    { name: "Élévation latérale poulie", videoUrl: "https://youtube.com/shorts/gS865di72kc?si=MuP-iT-hMeh7hlDg" },
+    { name: "DM barre", videoUrl: "https://youtube.com/shorts/kD5Cf7cIC60?si=2arsMb6cykslkkGE" }
+  ]
+};

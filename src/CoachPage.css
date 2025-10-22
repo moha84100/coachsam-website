@@ -1,0 +1,98 @@
+/* CoachPage.css */
+
+.coach-container {
+  padding: 4rem 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: var(--light-bg);
+  color: var(--main-black);
+}
+
+.coach-container h2 {
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  font-size: 3rem;
+  margin-bottom: 3rem;
+  color: var(--main-black);
+  text-transform: uppercase;
+}
+
+.program-form {
+  background: var(--main-white);
+  padding: 3rem;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: var(--main-black);
+}
+
+.program-form input[type="text"],
+.program-form input[type="number"],
+.program-form textarea,
+.program-form select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.program-form input[type="text"]:focus,
+.program-form input[type="number"]:focus,
+.program-form textarea:focus,
+.program-form select:focus {
+  outline: none;
+  border-color: var(--main-red);
+  box-shadow: 0 0 0 3px rgba(197, 150, 63, 0.2);
+}
+
+.program-form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.exercise-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border: 1px dashed var(--secondary-gray);
+  border-radius: 8px;
+}
+
+.program-form button {
+  background-color: var(--main-red);
+  color: var(--main-white);
+  border: none;
+  padding: 12px 25px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 50px;
+  transition: background-color 0.3s, transform 0.3s;
+  margin-top: 1.5rem;
+  text-transform: uppercase;
+}
+
+.program-form button:hover {
+  background-color: var(--main-red-hover);
+  transform: scale(1.05);
+}
+
+.program-form button[type="submit"] {
+  width: 100%;
+  margin-top: 2rem;
+}

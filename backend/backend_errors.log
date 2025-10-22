@@ -1,0 +1,44 @@
+[2025-09-04T06:54:18.905Z] MongooseError: The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.
+[2025-09-04T07:03:04.586Z] Operation `users.findOne()` buffering timed out after 10000ms
+[2025-09-04T07:03:22.414Z] Operation `users.findOne()` buffering timed out after 10000ms
+[2025-09-04T07:03:24.604Z] Operation `users.findOne()` buffering timed out after 10000ms
+[2025-09-04T07:03:25.417Z] Operation `users.findOne()` buffering timed out after 10000ms
+[2025-09-04T07:03:25.605Z] Operation `users.findOne()` buffering timed out after 10000ms
+[2025-09-04T07:03:25.784Z] Operation `users.findOne()` buffering timed out after 10000ms
+[2025-09-04T07:08:25.828Z] Operation `users.findOne()` buffering timed out after 10000ms
+[2025-09-04T07:22:17.243Z] MongooseError: The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.
+[2025-09-04T07:22:52.046Z] Operation `users.findOne()` buffering timed out after 10000ms
+[2025-09-04T07:55:00.780Z] Operation `users.findOne()` buffering timed out after 10000ms
+[2025-09-04T07:56:56.337Z] MongooseError: The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.
+[2025-10-14T17:40:57.718Z] MongooseError: The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.
+[2025-10-14T17:46:37.176Z] Operation `users.findOne()` buffering timed out after 10000ms
+[2025-10-14T17:46:43.758Z] Operation `users.findOne()` buffering timed out after 10000ms
+[2025-10-14T17:46:45.771Z] Operation `users.findOne()` buffering timed out after 10000ms
+[2025-10-14T17:46:46.900Z] Operation `users.findOne()` buffering timed out after 10000ms
+[2025-10-14T17:50:55.063Z] MongoServerError: bad auth : Authentication failed.
+[2025-10-14T17:51:23.904Z] Operation `users.findOne()` buffering timed out after 10000ms
+[2025-10-14T17:51:48.795Z] Operation `users.findOne()` buffering timed out after 10000ms
+[2025-10-16T09:15:15.108Z] Operation `users.findOne()` buffering timed out after 10000ms
+[2025-10-16T09:15:20.481Z] MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+[2025-10-16T09:22:28.358Z] Operation `users.findOne()` buffering timed out after 10000ms
+[2025-10-16T09:22:30.050Z] Operation `users.findOne()` buffering timed out after 10000ms
+[2025-10-16T09:22:34.458Z] MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+[2025-10-16T09:22:52.432Z] Operation `users.findOne()` buffering timed out after 10000ms
+[2025-10-16T09:22:53.881Z] Operation `users.findOne()` buffering timed out after 10000ms
+[2025-10-16T09:30:54.378Z] MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+[2025-10-16T09:31:19.909Z] Operation `users.findOne()` buffering timed out after 10000ms
+[2025-10-16T09:34:04.522Z] connection <monitor> to [64:ff9b::413e:2bf]:27017 timed out
+[2025-10-16T09:34:04.526Z] connection <monitor> to [64:ff9b::413e:2bf]:27017 timed out
+[2025-10-16T09:34:20.229Z] Socket 'secureConnect' timed out after 30012ms (connectTimeoutMS: 30000)
+[2025-10-16T09:34:21.855Z] Socket 'secureConnect' timed out after 30012ms (connectTimeoutMS: 30000)
+[2025-10-16T09:34:32.849Z] getaddrinfo EAI_AGAIN ac-guegfep-shard-00-00.lbjmp7u.mongodb.net
+[2025-10-16T09:34:34.058Z] getaddrinfo EAI_AGAIN ac-guegfep-shard-00-00.lbjmp7u.mongodb.net
+[2025-10-16T09:34:34.231Z] getaddrinfo EAI_AGAIN ac-guegfep-shard-00-00.lbjmp7u.mongodb.net
+[2025-10-16T09:34:34.402Z] getaddrinfo EAI_AGAIN ac-guegfep-shard-00-00.lbjmp7u.mongodb.net
+[2025-10-16T09:34:50.262Z] getaddrinfo EAI_AGAIN ac-guegfep-shard-00-00.lbjmp7u.mongodb.net
+[2025-10-16T09:34:50.264Z] getaddrinfo EAI_AGAIN ac-guegfep-shard-00-00.lbjmp7u.mongodb.net
+[2025-10-21T12:18:52.157Z] MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+[2025-10-22T08:41:22.560Z] jwt expired
+[2025-10-22T08:41:22.566Z] jwt expired
+[2025-10-22T08:41:28.448Z] jwt expired
+[2025-10-22T08:41:28.457Z] jwt expired

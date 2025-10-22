@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link, useLocation, Navigate } from 'react-router-dom';
 import { InlineWidget } from 'react-calendly';
 import { useInView } from 'react-intersection-observer';
 import './App.css';
 import Blog from './Blog';
 import Outils from './Outils';
 import Questionnaire from './Questionnaire';
-import Contact from './Contact'; // Added Contact import
+import Contact from './Contact';
 import AvantApres from './AvantApres';
+import LoginPage from './LoginPage';
+import RegisterPage from './RegisterPage';
+import ProfilePage from './ProfilePage';
+import AdminPage from './AdminPage';
+import UserProgramCalendar from './UserProgramCalendar';
+import SessionPage from './SessionPage';
+import BodyMeasurementsPage from './BodyMeasurementsPage';
 
 // Animated Service Card Component
 const AnimatedServiceCard = ({ icon, title, description, buttonText, animationDirection }) => {
@@ -92,11 +99,96 @@ const MainPage = () => {
     }
   }, [location]);
 
+  const testimonials = [
+    {
+      imgSrc: "https://placehold.co/300x300",
+      altText: "Grandingo",
+      quote: "J'avais tout essayé pour perdre du poids, sans succès. Avec Sam, j'ai perdu 15 kg en 2 mois et, surtout, j'ai appris à aimer le sport. Son approche bienveillante a tout changé !",
+      author: "Grandingo, -15 kg"
+    },
+    {
+      imgSrc: "https://placehold.co/301x301",
+      altText: "Elio",
+      quote: "Je voulais prendre de la masse mais je stagnais. Le programme de Sam, allié à ses conseils en nutrition, m'a permis de gagner 8 kg de muscle propre. Un vrai pro !",
+      author: "Elio, +8 kg de muscle"
+    },
+    {
+      imgSrc: "https://placehold.co/302x302",
+      altText: "Mohamed",
+      quote: "En tant que coureur, je devais améliorer mon endurance pour un marathon. Sam a structuré ma préparation et m'a permis de passer sous la barre des 3h30. Inestimable.",
+      author: "Mohamed, Marathonien"
+    },
+    {
+      imgSrc: "https://placehold.co/303x303",
+      altText: "Laura",
+      quote: "Le coaching de Sam a été une révélation. J'ai non seulement atteint mon objectif de poids, mais j'ai aussi retrouvé une énergie que je ne pensais plus possible. Un grand merci !",
+      author: "Laura, -10 kg"
+    },
+    {
+      imgSrc: "https://placehold.co/304x304",
+      altText: "Julien",
+      quote: "Je m'entraînais depuis des années sans voir de réels progrès. Sam a su identifier mes erreurs et m'a créé un programme qui a tout changé. Les résultats sont là !",
+      author: "Julien, +5 kg de muscle"
+    },
+    {
+      imgSrc: "https://placehold.co/305x305",
+      altText: "Sophie",
+      quote: "Je détestais courir. Sam m'a appris à aimer ça et j'ai terminé mon premier 10km. Jamais je n'aurais cru ça possible. Son soutien est incroyable.",
+      author: "Sophie, Course à pied"
+    },
+    {
+      imgSrc: "https://placehold.co/306x306",
+      altText: "David",
+      quote: "J'ai perdu 20kg en 6 mois. Sam est plus qu'un coach, c'est un véritable partenaire de réussite. Il est toujours là pour vous motiver et vous conseiller.",
+      author: "David, -20 kg"
+    },
+    {
+      imgSrc: "https://placehold.co/307x307",
+      altText: "Chloé",
+      quote: "Au-delà de la transformation physique, c'est ma confiance en moi qui a explosé. Les séances avec Sam sont un vrai boost pour le moral.",
+      author: "Chloé, Confiance en soi"
+    },
+    {
+      imgSrc: "https://placehold.co/308x308",
+      altText: "Alexandre",
+      quote: "Je préparais un concours sportif et Sam a été essentiel dans ma réussite. Son expertise et sa rigueur m'ont permis d'être au top le jour J.",
+      author: "Alexandre, Préparation physique"
+    },
+    {
+      imgSrc: "https://placehold.co/309x309",
+      altText: "Manon",
+      quote: "J'avais peur de ne pas y arriver, mais Sam a su me mettre en confiance. J'ai perdu 8kg et je me sens tellement mieux dans mon corps et dans ma tête.",
+      author: "Manon, -8 kg"
+    },
+    {
+      imgSrc: "https://placehold.co/310x310",
+      altText: "Thomas",
+      quote: "Un coach à l'écoute et très professionnel. Il m'a permis de dépasser mes limites et d'atteindre des objectifs que je pensais inaccessibles.",
+      author: "Thomas, +7 kg de muscle"
+    },
+    {
+      imgSrc: "https://placehold.co/311x311",
+      altText: "Elodie",
+      quote: "Je cherchais à me remettre en forme après ma grossesse. Sam a été d'une grande aide pour retrouver mon corps et mon énergie. Je le recommande à 100%.",
+      author: "Elodie, Bien-être"
+    }
+  ];
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const next = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 3) % testimonials.length);
+  };
+
+  const prev = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 3 + testimonials.length) % testimonials.length);
+  };
+
   return (
   <>
     <section id="hero" className="hero-section">
       <video autoPlay loop muted playsInline className="hero-video">
-        <source src={process.env.PUBLIC_URL + "/hero_video.mp4"} type="video/mp4" />
+        <source src={process.env.PUBLIC_URL + "/hero_video.mov"} type="video/quicktime" />
       </video>
       <div className="hero-overlay"></div>
       <div className="hero-content">
@@ -123,8 +215,8 @@ const MainPage = () => {
         <AnimatedServiceCard 
           animationDirection="from-right"
           icon="fa-users"
-          title="Coaching en Groupe"
-          description="Rejoignez une communauté dynamique et motivante. Des sessions collectives pour se dépasser ensemble dans la bonne humeur."
+          title="Entrainement en distencielle"
+          description="Rejoignez des entraînements à distance en direct. Des sessions interactives pour vous dépasser depuis chez vous."
           buttonText="Rejoindre"
         />
         <AnimatedServiceCard 
@@ -146,29 +238,21 @@ const MainPage = () => {
 
     <section id="testimonials">
       <h2>Ce que disent mes clients</h2>
-      <div className="testimonial-cards">
-        <AnimatedTestimonialCard
-          animationDirection="from-left"
-
-          imgSrc={process.env.PUBLIC_URL + "/grandingo.jpg"}
-          altText="Grandingo"
-          quote="J'avais tout essayé pour perdre du poids, sans succès. Avec Sam, j'ai perdu 15 kg en 2 mois et, surtout, j'ai appris à aimer le sport. Son approche bienveillante a tout changé !"
-          author="Grandingo, -15 kg"
-        />
-        <AnimatedTestimonialCard
-          animationDirection="from-right"
-          imgSrc="https://img.freepik.com/photos-premium/corps-est-ne-travail-acharne-determination-portrait-jeune-homme-torse-nu-muscle-debout-exterieur_590464-39559.jpg"
-          altText="Elio"
-          quote="Je voulais prendre de la masse mais je stagnais. Le programme de Sam, allié à ses conseils en nutrition, m'a permis de gagner 8 kg de muscle propre. Un vrai pro !"
-          author="Elio, +8 kg de muscle"
-        />
-        <AnimatedTestimonialCard
-          animationDirection="from-left"
-          imgSrc={process.env.PUBLIC_URL + "/ma_photo_de_profil.jpg"}
-          altText="Mohamed"
-          quote="En tant que coureur, je devais améliorer mon endurance pour un marathon. Sam a structuré ma préparation et m'a permis de passer sous la barre des 3h30. Inestimable."
-          author="Mohamed, Marathonien"
-        />
+      <div className="testimonial-carousel">
+        <button className="carousel-arrow prev" onClick={prev}>&#10094;</button>
+        <div className="testimonial-cards">
+          {testimonials.slice(currentIndex, currentIndex + 3).map((testimonial, index) => (
+            <AnimatedTestimonialCard
+              key={index}
+              animationDirection="from-left"
+              imgSrc={testimonial.imgSrc}
+              altText={testimonial.altText}
+              quote={testimonial.quote}
+              author={testimonial.author}
+            />
+          ))}
+        </div>
+        <button className="carousel-arrow next" onClick={next}>&#10095;</button>
       </div>
     </section>
 
@@ -219,9 +303,9 @@ const MainPage = () => {
               <p>07 67 61 44 46</p>
             </div>
             <div className="social-links-contact">
-              <a href="#"><i className="fab fa-facebook-f"></i></a>
-              <a href="#"><i className="fab fa-instagram"></i></a>
-              <a href="#"><i className="fab fa-linkedin-in"></i></a>
+              <a href="https://www.facebook.com/p/Samuel-Wehbe-100093540156811/"><i className="fab fa-facebook-f"></i></a>
+              <a href="https://www.instagram.com/samuelwehbe/?igsh=MXJ4eHVudjJ3anl0aw%3D%3D"><i className="fab fa-instagram"></i></a>
+              <a href="https://www.linkedin.com/in/mohamed-ech-chkoubi-a15954227/?originalSubdomain=fr"><i className="fab fa-linkedin-in"></i></a>
             </div>
           </div>
         </div>
@@ -233,7 +317,43 @@ const MainPage = () => {
 function App() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  
+  // State for authentication
+  const [token, setToken] = useState(localStorage.getItem('token'));
+  const [isAuthenticated, setIsAuthenticated] = useState(!!token);
+  const [isAdmin, setIsAdmin] = useState(false);
 
+  // Effect to check admin status when authenticated
+  useEffect(() => {
+    const checkAdminStatus = async () => {
+      if (token) {
+        try {
+          const response = await fetch('http://localhost:3001/api/auth/check-admin', {
+            headers: {
+              'x-auth-token': token,
+            },
+          });
+          if (response.ok) {
+            const data = await response.json();
+            setIsAdmin(data.isAdmin);
+            setIsAuthenticated(true);
+          } else {
+            // Invalid token, logout
+            handleLogout();
+          }
+        } catch (error) {
+          console.error('Error checking admin status:', error);
+          handleLogout();
+        }
+      } else {
+        setIsAuthenticated(false);
+        setIsAdmin(false);
+      }
+    };
+    checkAdminStatus();
+  }, [token]);
+
+  // Effect for scroll handling
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 50;
@@ -241,23 +361,34 @@ function App() {
         setScrolled(isScrolled);
       }
     };
-
     document.addEventListener('scroll', handleScroll);
-    return () => {
-      document.removeEventListener('scroll', handleScroll);
-    };
+    return () => document.removeEventListener('scroll', handleScroll);
   }, [scrolled]);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
+  // Login handler to be passed to LoginPage
+  const handleLogin = (newToken) => {
+    localStorage.setItem('token', newToken);
+    setToken(newToken);
+    setIsAuthenticated(true);
+  };
+
+  // Logout handler
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setToken(null);
+  };
+
   return (
-    <Router basename={process.env.PUBLIC_URL}>
+    <Router>
       <div className="App">
         <header className={`App-header ${scrolled ? 'scrolled' : ''}`}>
           <nav className={`main-nav ${menuOpen ? 'is-open' : ''}`}>
             <ul>
+              {/* Common links */}
               <li><Link to="/#hero" onClick={toggleMenu}>Accueil</Link></li>
               <li><Link to="/#services" onClick={toggleMenu}>Services</Link></li>
               <li><Link to="/#testimonials" onClick={toggleMenu}>Témoignages</Link></li>
@@ -265,7 +396,19 @@ function App() {
               <li><Link to="/avant-apres" onClick={toggleMenu}>Avant Après</Link></li>
               <li><Link to="/outils" onClick={toggleMenu}>Outils</Link></li>
               <li><Link to="/questionnaire" onClick={toggleMenu}>Questionnaire</Link></li>
-              <li><Link to="/contact" onClick={toggleMenu}>Contact</Link></li> {/* Added Contact link */}
+              <li><Link to="/contact" onClick={toggleMenu}>Contact</Link></li>
+              
+              {/* Conditional links */}
+              {isAuthenticated ? (
+                <>
+                  {isAdmin && <li><Link to="/admin" onClick={toggleMenu}>Admin</Link></li>}
+                  <li><Link to="/profile" onClick={toggleMenu}>Profil</Link></li>
+                  <li><a href="/" onClick={(e) => { e.preventDefault(); handleLogout(); toggleMenu(); }} className="logout-button">Déconnexion</a></li>
+                </>
+              ) : (
+                <li><Link to="/login" onClick={toggleMenu}>Login</Link></li>
+              )}
+              
               <li><Link to="/"><img src={process.env.PUBLIC_URL + "/images/logo.png"} alt="Coach Sam Logo" className="nav-logo" /></Link></li>
             </ul>
           </nav>
@@ -275,15 +418,59 @@ function App() {
         </header>
 
         <Routes>
-          <Route path="/" element={<MainPage />} /> {/* Changed from AvantApres */}
+          <Route path="/" element={<MainPage />} />
           <Route path="/outils" element={<Outils />} />
           <Route path="/questionnaire" element={<Questionnaire />} />
           <Route path="/avant-apres" element={<AvantApres />} />
-          <Route path="/contact" element={<Contact />} /> {/* Added Contact route */}
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
+          <Route path="/register" element={<RegisterPage />} />
+          
+          {/* Protected Profile Route */}
+          <Route path="/profile" element={isAuthenticated ? <ProfilePage /> : <Navigate to="/login" />} />
+          <Route path="/profile/body-measurements" element={isAuthenticated ? <BodyMeasurementsPage /> : <Navigate to="/login" />} />
+          
+          {/* Protected Admin Route */}
+          <Route path="/admin" element={isAuthenticated && isAdmin ? <AdminPage /> : <Navigate to="/" />} />
+          <Route path="/admin/user/:userId/program" element={isAuthenticated && isAdmin ? <UserProgramCalendar /> : <Navigate to="/" />} />
+          <Route path="/admin/user/:userId/body-measurements" element={isAuthenticated && isAdmin ? <BodyMeasurementsPage /> : <Navigate to="/" />} />
+
+          {/* Protected Session Route */}
+          <Route path="/session/:programId" element={isAuthenticated ? <SessionPage /> : <Navigate to="/login" />} />
         </Routes>
 
         <footer>
-          <p>&copy; 2025 Coach Sam. By Ech-Chkoubi Mohamed.</p>
+          <div className="footer-content">
+            <div className="footer-logo">
+              <img src={process.env.PUBLIC_URL + "/images/logo.png"} alt="Coach Sam Logo" />
+              <p>Transformez Votre Vie, Pas Seulement Votre Corps.</p>
+            </div>
+            <div className="footer-links">
+              <h4>Navigation</h4>
+              <ul>
+                <li><Link to="/#hero">Accueil</Link></li>
+                <li><Link to="/#services">Services</Link></li>
+                <li><Link to="/#testimonials">Témoignages</Link></li>
+                <li><Link to="/#booking">Réserver</Link></li>
+                <li><Link to="/avant-apres">Avant Après</Link></li>
+                <li><Link to="/outils">Outils</Link></li>
+                <li><Link to="/questionnaire">Questionnaire</Link></li>
+                <li><Link to="/contact">Contact</Link></li>
+                <li><Link to="/login">Login</Link></li>
+              </ul>
+            </div>
+            <div className="footer-social">
+              <h4>Suivez-moi</h4>
+              <div className="social-links">
+                <a href="https://www.facebook.com/p/Samuel-Wehbe-100093540156811/" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/samuelwehbe/?igsh=MXJ4eHVudjJ3anl0aw%3D%3D" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/mohamed-ech-chkoubi-a15954227/?originalSubdomain=fr" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin-in"></i></a>
+              </div>
+            </div>
+          </div>
+          <div className="footer-bottom">
+            <p>&copy; 2025 Coach Sam. By Ech-Chkoubi Mohamed.</p>
+          </div>
         </footer>
       </div>
     </Router>
