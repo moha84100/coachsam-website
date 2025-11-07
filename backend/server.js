@@ -1,5 +1,9 @@
 const path = require('path');
-require('dotenv').config({ path: path.join(__dirname, '.env') });
+// Only use dotenv in development
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config({ path: path.join(__dirname, '.env') });
+}
+
 const express = require('express');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
@@ -7,7 +11,7 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 
 const app = express();
-const port = 3001;
+const port = process.env.PORT || 3001;
 
 const allowedOrigins = [
   'http://localhost:3000',
@@ -555,5 +559,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(port, () => {
-  console.log(`Serveur en écoute sur http://localhost:${port}`);
+  console.log(`Serveur en écoute sur le port ${port}`);
 });
