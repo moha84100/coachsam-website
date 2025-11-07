@@ -5,6 +5,9 @@ import format from 'date-fns/format';
 import parse from 'date-fns/parse';
 import startOfWeek from 'date-fns/startOfWeek';
 import getDay from 'date-fns/getDay';
+import addMonths from 'date-fns/addMonths';
+import addDays from 'date-fns/addDays';
+import startOfDay from 'date-fns/startOfDay';
 import fr from 'date-fns/locale/fr';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import './UserProgramCalendar.css';
@@ -91,38 +94,104 @@ const UserProgramCalendar = () => {
     setEditingProgram(event.resource);
   };
 
-  const handleSaveProgram = async (programData) => {
+  const handleSaveProgram = async (programData, isRecurring, recurrenceDayOfWeek, recurrenceMonths) => {
     const token = localStorage.getItem('token');
     const isEditing = !!editingProgram;
 
-    const method = isEditing ? 'PUT' : 'POST';
-    const url = isEditing
-      ? `http://localhost:3001/api/programs/${editingProgram._id}`
-      : 'http://localhost:3001/api/programs/add';
+    if (isEditing) {
+      // Handle editing of a single program (no recurrence for edits yet)
+      const method = 'PUT';
+      const url = `http://localhost:3001/api/programs/${editingProgram._id}`;
+      const body = programData;
 
-    const body = isEditing
-      ? programData
-      : { ...programData, userId, date: selectedDate };
+      try {
+        const res = await fetch(url, {
+          method,
+          headers: {
+            'Content-Type': 'application/json',
+            'x-auth-token': token,
+          },
+          body: JSON.stringify(body),
+        });
 
-    try {
-      const res = await fetch(url, {
-        method,
-        headers: {
-          'Content-Type': 'application/json',
-          'x-auth-token': token,
-        },
-        body: JSON.stringify(body),
-      });
+        if (!res.ok) {
+          const errorData = await res.json();
+          throw new Error(errorData.msg || 'Failed to save program');
+        }
 
-      if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(errorData.msg || 'Failed to save program');
+        handleCloseModal();
+        fetchPrograms(); // Refetch to show the update
+      } catch (err) {
+        setError(err.message);
+      }
+    } else if (isRecurring) {
+      // Handle adding recurring programs
+      const programsToAdd = [];
+      let currentDate = startOfDay(selectedDate);
+      const endRecurrenceDate = addMonths(currentDate, recurrenceMonths);
+      const targetDay = parseInt(recurrenceDayOfWeek, 10);
+
+      // Find the first occurrence of the target day of week from the selected date
+      while (getDay(currentDate) !== targetDay) {
+        currentDate = addDays(currentDate, 1);
       }
 
-      handleCloseModal();
-      fetchPrograms(); // Refetch to show the update
-    } catch (err) {
-      setError(err.message);
+      while (currentDate <= endRecurrenceDate) {
+        programsToAdd.push({
+          ...programData,
+          userId,
+          date: currentDate.toISOString(), // Store as ISO string
+        });
+        currentDate = addDays(currentDate, 7); // Move to the next week
+      }
+
+      try {
+        const res = await fetch('http://localhost:3001/api/programs/add-recurring', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-auth-token': token,
+          },
+          body: JSON.stringify(programsToAdd),
+        });
+
+        if (!res.ok) {
+          const errorData = await res.json();
+          throw new Error(errorData.msg || 'Failed to add recurring programs');
+        }
+
+        handleCloseModal();
+        fetchPrograms(); // Refetch to show the new programs
+      } catch (err) {
+        setError(err.message);
+      }
+
+    } else {
+      // Handle adding a single program
+      const method = 'POST';
+      const url = 'http://localhost:3001/api/programs/add';
+      const body = { ...programData, userId, date: selectedDate };
+
+      try {
+        const res = await fetch(url, {
+          method,
+          headers: {
+            'Content-Type': 'application/json',
+            'x-auth-token': token,
+          },
+          body: JSON.stringify(body),
+        });
+
+        if (!res.ok) {
+          const errorData = await res.json();
+          throw new Error(errorData.msg || 'Failed to save program');
+        }
+
+        handleCloseModal();
+        fetchPrograms(); // Refetch to show the update
+      } catch (err) {
+        setError(err.message);
+      }
     }
   };
 

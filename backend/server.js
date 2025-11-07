@@ -347,7 +347,35 @@ app.post('/api/programs/add', adminAuth, async (req, res) => {
     res.json(program);
   } catch (err) {
     logError(err.message);
-    res.status(500).json({ msg: 'Server error' });
+    res.status(500).json({ msg: err.message || 'Server error' });
+  }
+});
+
+// Add multiple recurring programs (Admin only)
+app.post('/api/programs/add-recurring', adminAuth, async (req, res) => {
+  const programsToAdd = req.body; // Expecting an array of program objects
+
+  if (!Array.isArray(programsToAdd) || programsToAdd.length === 0) {
+    return res.status(400).json({ msg: 'Request body must be a non-empty array of programs' });
+  }
+
+  try {
+    const savedPrograms = await Promise.all(programsToAdd.map(async (programData) => {
+      const { userId, date, title, description, isRestDay, exercises } = programData;
+      const newProgram = new Program({
+        userId,
+        date,
+        title,
+        description,
+        isRestDay,
+        exercises,
+      });
+      return await newProgram.save();
+    }));
+    res.json(savedPrograms);
+  } catch (err) {
+    logError(err.message);
+    res.status(500).json({ msg: err.message || 'Server error' });
   }
 });
 
@@ -359,7 +387,7 @@ app.get('/api/programs/all', adminAuth, async (req, res) => {
     res.json(programs);
   } catch (err) {
     logError(err.message);
-    res.status(500).json({ msg: 'Server error' });
+    res.status(500).json({ msg: err.message || 'Server error' });
   }
 });
 
@@ -504,6 +532,15 @@ app.delete('/api/programs/:id', adminAuth, async (req, res) => {
     logError(err.message);
     res.status(500).json({ msg: 'Server error' });
   }
+});
+
+// Global error handling middleware
+app.use((err, req, res, next) => {
+  logError(err.stack); // Log the full stack trace for debugging
+  res.status(err.statusCode || 500).json({
+    msg: err.message || 'An unexpected server error occurred',
+    error: process.env.NODE_ENV === 'development' ? err.stack : undefined, // Provide stack trace in development
+  });
 });
 
 app.listen(port, () => {

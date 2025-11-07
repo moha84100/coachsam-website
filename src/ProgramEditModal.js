@@ -9,6 +9,9 @@ const ProgramEditModal = ({ isOpen, onClose, onSave, onDelete, program, date }) 
     isRestDay: false,
     exercises: [],
   });
+  const [isRecurring, setIsRecurring] = useState(false);
+  const [recurrenceDayOfWeek, setRecurrenceDayOfWeek] = useState('');
+  const [recurrenceMonths, setRecurrenceMonths] = useState(1);
 
   useEffect(() => {
     if (program) {
@@ -18,6 +21,10 @@ const ProgramEditModal = ({ isOpen, onClose, onSave, onDelete, program, date }) 
         isRestDay: program.isRestDay || false,
         exercises: program.exercises.map(ex => ({ ...ex, muscleGroup: ex.muscleGroup || '' })) || [],
       });
+      // Initialize recurrence states if program has them (for future editing of recurring programs)
+      setIsRecurring(program.isRecurring || false);
+      setRecurrenceDayOfWeek(program.recurrenceDayOfWeek || '');
+      setRecurrenceMonths(program.recurrenceMonths || 1);
     } else {
       setFormData({
         title: '',
@@ -25,6 +32,10 @@ const ProgramEditModal = ({ isOpen, onClose, onSave, onDelete, program, date }) 
         isRestDay: false,
         exercises: [{ name: '', sets: '', reps: '', videoUrl: '', muscleGroup: '' }],
       });
+      // Reset recurrence states for new programs
+      setIsRecurring(false);
+      setRecurrenceDayOfWeek('');
+      setRecurrenceMonths(1);
     }
   }, [program, isOpen]);
 
@@ -70,7 +81,7 @@ const ProgramEditModal = ({ isOpen, onClose, onSave, onDelete, program, date }) 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSave(formData);
+    onSave(formData, isRecurring, recurrenceDayOfWeek, recurrenceMonths);
   };
 
   const handleDelete = () => {
@@ -110,13 +121,45 @@ const ProgramEditModal = ({ isOpen, onClose, onSave, onDelete, program, date }) 
             <label>
               <input
                 type="checkbox"
-                name="isRestDay"
-                checked={formData.isRestDay}
-                onChange={handleInputChange}
+                name="isRecurring"
+                checked={isRecurring}
+                onChange={(e) => setIsRecurring(e.target.checked)}
               />
-              Jour de repos
+              Séance récurrente
             </label>
           </div>
+
+          {isRecurring && (
+            <div className="recurrence-options">
+              <div className="form-group">
+                <label>Jour de la semaine</label>
+                <select
+                  value={recurrenceDayOfWeek}
+                  onChange={(e) => setRecurrenceDayOfWeek(e.target.value)}
+                  required
+                >
+                  <option value="">Sélectionner un jour</option>
+                  <option value="0">Dimanche</option>
+                  <option value="1">Lundi</option>
+                  <option value="2">Mardi</option>
+                  <option value="3">Mercredi</option>
+                  <option value="4">Jeudi</option>
+                  <option value="5">Vendredi</option>
+                  <option value="6">Samedi</option>
+                </select>
+              </div>
+              <div className="form-group">
+                <label>Durée (mois)</label>
+                <input
+                  type="number"
+                  value={recurrenceMonths}
+                  onChange={(e) => setRecurrenceMonths(parseInt(e.target.value))}
+                  min="1"
+                  required
+                />
+              </div>
+            </div>
+          )}
 
           {!formData.isRestDay && (
             <div className="exercises-section">
