@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/coachsam-website/static/css/main.acea6f0c.css",
-    "main.js": "/coachsam-website/static/js/main.b2e4c89a.js",
-    "static/js/453.fd7e5b89.chunk.js": "/coachsam-website/static/js/453.fd7e5b89.chunk.js",
+    "main.css": "/coachsam-website/static/css/main.cdd3b554.css",
+    "main.js": "/coachsam-website/static/js/main.9eb7ff4b.js",
+    "static/js/453.deff59fe.chunk.js": "/coachsam-website/static/js/453.deff59fe.chunk.js",
     "index.html": "/coachsam-website/index.html",
-    "main.acea6f0c.css.map": "/coachsam-website/static/css/main.acea6f0c.css.map",
-    "main.b2e4c89a.js.map": "/coachsam-website/static/js/main.b2e4c89a.js.map",
-    "453.fd7e5b89.chunk.js.map": "/coachsam-website/static/js/453.fd7e5b89.chunk.js.map"
+    "main.cdd3b554.css.map": "/coachsam-website/static/css/main.cdd3b554.css.map",
+    "main.9eb7ff4b.js.map": "/coachsam-website/static/js/main.9eb7ff4b.js.map",
+    "453.deff59fe.chunk.js.map": "/coachsam-website/static/js/453.deff59fe.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.acea6f0c.css",
-    "static/js/main.b2e4c89a.js"
+    "static/css/main.cdd3b554.css",
+    "static/js/main.9eb7ff4b.js"
   ]
 }
