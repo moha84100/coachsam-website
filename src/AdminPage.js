@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AdminPage.css';
+import apiUrl from './apiConfig';
 
 const AdminPage = () => {
   const [users, setUsers] = useState([]);
@@ -19,7 +20,7 @@ const AdminPage = () => {
       }
 
       try {
-        const res = await fetch('http://localhost:3001/api/users', {
+        const res = await fetch(`${apiUrl}/api/users`, {
           headers: { 'x-auth-token': token },
         });
         if (!res.ok) throw new Error('Failed to fetch users');

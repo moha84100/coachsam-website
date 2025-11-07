@@ -12,6 +12,7 @@ import fr from 'date-fns/locale/fr';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import './UserProgramCalendar.css';
 import ProgramEditModal from './ProgramEditModal'; // Import the modal
+import apiUrl from './apiConfig';
 
 // Setup the localizer
 const locales = {
@@ -51,7 +52,7 @@ const UserProgramCalendar = () => {
     }
 
     try {
-      const res = await fetch(`http://localhost:3001/api/programs/user/${userId}`, {
+      const res = await fetch(`${apiUrl}/api/programs/user/${userId}`, {
         headers: { 'x-auth-token': token },
       });
       if (!res.ok) throw new Error('Failed to fetch programs for this user');
@@ -101,7 +102,7 @@ const UserProgramCalendar = () => {
     if (isEditing) {
       // Handle editing of a single program (no recurrence for edits yet)
       const method = 'PUT';
-      const url = `http://localhost:3001/api/programs/${editingProgram._id}`;
+      const url = `${apiUrl}/api/programs/${editingProgram._id}`;
       const body = programData;
 
       try {
@@ -146,7 +147,7 @@ const UserProgramCalendar = () => {
       }
 
       try {
-        const res = await fetch('http://localhost:3001/api/programs/add-recurring', {
+        const res = await fetch(`${apiUrl}/api/programs/add-recurring`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -169,7 +170,7 @@ const UserProgramCalendar = () => {
     } else {
       // Handle adding a single program
       const method = 'POST';
-      const url = 'http://localhost:3001/api/programs/add';
+      const url = `${apiUrl}/api/programs/add`;
       const body = { ...programData, userId, date: selectedDate };
 
       try {
@@ -200,7 +201,7 @@ const UserProgramCalendar = () => {
 
     const token = localStorage.getItem('token');
     try {
-      const res = await fetch(`http://localhost:3001/api/programs/${programId}`, {
+      const res = await fetch(`${apiUrl}/api/programs/${programId}`, {
         method: 'DELETE',
         headers: { 'x-auth-token': token },
       });

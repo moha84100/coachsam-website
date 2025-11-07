@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './BodyMeasurementsPage.css';
+import apiUrl from './apiConfig';
 
 const BodyMeasurementsPage = () => {
   const { userId } = useParams();
@@ -66,7 +67,7 @@ const BodyMeasurementsPage = () => {
       const token = localStorage.getItem('token');
       if (token) {
         try {
-          const response = await fetch('http://localhost:3001/api/auth/check-admin', {
+          const response = await fetch(`${apiUrl}/api/auth/check-admin`, {
             headers: {
               'x-auth-token': token,
             },

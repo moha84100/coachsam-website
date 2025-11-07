@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: coachsam-backend
+    runtime: node
+    repo: https://github.com/moha84100/coachsam-website
+    rootDir: ./backend
+    buildCommand: "npm install"
+    startCommand: "node server.js"
+    envVars:
+      - key: MONGO_URI
+        fromDatabase:
+          name: coachsam-db
+          property: connectionString
+      - key: EMAIL_USER
+        sync: false
+      - key: EMAIL_PASS
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+
+  - type: pserv
+    name: coachsam-db
+    runtime: mongodb

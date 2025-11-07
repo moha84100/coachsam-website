@@ -15,6 +15,7 @@ import AdminPage from './AdminPage';
 import UserProgramCalendar from './UserProgramCalendar';
 import SessionPage from './SessionPage';
 import BodyMeasurementsPage from './BodyMeasurementsPage';
+import apiUrl from './apiConfig';
 
 // Animated Service Card Component
 const AnimatedServiceCard = ({ icon, title, description, buttonText, animationDirection }) => {
@@ -64,7 +65,7 @@ const MainPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch('http://localhost:3001/send-email', {
+    fetch(`${apiUrl}/send-email`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

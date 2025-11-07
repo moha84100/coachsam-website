@@ -8,6 +8,7 @@ import getDay from 'date-fns/getDay';
 import fr from 'date-fns/locale/fr';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import './ProfilePage.css'; // We will reuse and adapt the styles
+import apiUrl from './apiConfig';
 
 // Setup the localizer for react-big-calendar
 const locales = {
@@ -43,7 +44,7 @@ const ProfilePage = () => {
 
     try {
       // Fetch programs for the logged-in user
-      const res = await fetch('http://localhost:3001/api/programs', {
+      const res = await fetch(`${apiUrl}/api/programs`, {
         headers: { 'x-auth-token': token },
       });
       if (!res.ok) throw new Error('Impossible de récupérer le programme.');

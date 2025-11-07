@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './SessionPage.css';
+import apiUrl from './apiConfig';
 
 const SessionPage = () => {
   const { programId } = useParams();
@@ -19,7 +20,7 @@ const SessionPage = () => {
       }
 
       try {
-        const res = await fetch(`http://localhost:3001/api/programs/${programId}`, {
+        const res = await fetch(`${apiUrl}/api/programs/${programId}`, {
           headers: { 'x-auth-token': token },
         });
         if (!res.ok) throw new Error('Impossible de charger la séance.');

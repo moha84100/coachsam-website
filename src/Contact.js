@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useInView } from 'react-intersection-observer'; // Import useInView
 import './Contact.css';
+import apiUrl from './apiConfig';
 
 function Contact() {
   const { ref: contactRef, inView: contactInView } = useInView({ triggerOnce: true, threshold: 0.2 });
@@ -12,7 +13,7 @@ function Contact() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch('http://localhost:3001/send-email', {
+    fetch(`${apiUrl}/send-email`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

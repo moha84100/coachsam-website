@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './CoachPage.css'; // Import the CSS file
+import apiUrl from './apiConfig';
 
 const CoachPage = () => {
   const [users, setUsers] = useState([]);
@@ -17,7 +18,7 @@ const CoachPage = () => {
         navigate('/login');
         return;
       }
-      const res = await fetch('http://localhost:3001/api/users', {
+      const res = await fetch(`${apiUrl}/api/users`, {
         headers: {
           'x-auth-token': token,
         },
@@ -49,7 +50,7 @@ const CoachPage = () => {
   const handleSubmitProgram = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem('token');
-    const res = await fetch('http://localhost:3001/api/programs/add', {
+    const res = await fetch(`${apiUrl}/api/programs/add`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Auth.css';
+import apiUrl from './apiConfig';
 
 const RegisterPage = () => {
   const [name, setName] = useState('');
@@ -11,7 +12,7 @@ const RegisterPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Submitting registration form');
-    const res = await fetch('http://localhost:3001/api/users/register', {
+    const res = await fetch(`${apiUrl}/api/users/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

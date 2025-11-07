@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Questionnaire.css';
+import apiUrl from './apiConfig';
 
 function Questionnaire() {
   const [formData, setFormData] = useState({
@@ -39,7 +40,7 @@ function Questionnaire() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch('http://localhost:3001/send-email', {
+    fetch(`${apiUrl}/send-email`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

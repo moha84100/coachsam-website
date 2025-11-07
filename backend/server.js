@@ -9,8 +9,19 @@ const fs = require('fs');
 const app = express();
 const port = 3001;
 
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://moha84100.github.io'
+];
+
 app.use(cors({
-  origin: 'http://localhost:3000'
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
 }));
 app.use(bodyParser.json());
 
