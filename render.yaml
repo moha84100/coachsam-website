@@ -8,16 +8,10 @@ services:
     startCommand: "node server.js"
     envVars:
       - key: MONGO_URI
-        fromDatabase:
-          name: coachsam-db
-          property: connectionString
+        sync: false # This will be manually set by the user from MongoDB Atlas
       - key: EMAIL_USER
         sync: false
       - key: EMAIL_PASS
         sync: false
       - key: JWT_SECRET
         generateValue: true
-
-databases:
-  - name: coachsam-db
-    plan: free
