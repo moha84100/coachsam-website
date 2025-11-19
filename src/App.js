@@ -329,7 +329,7 @@ function App() {
     const checkAdminStatus = async () => {
       if (token) {
         try {
-          const response = await fetch('http://localhost:3001/api/auth/check-admin', {
+          const response = await fetch(`${apiUrl}/api/auth/check-admin`, {
             headers: {
               'x-auth-token': token,
             },
