@@ -577,7 +577,7 @@ h2 {
   .main-nav.is-open ul a {
     font-size: 2rem;
     text-shadow: none;
-    color: var(--main-red); /* Changed from var(--main-white) to var(--main-red) */
+    color: var(--main-red) !important; /* Ensure links are always golden */
   }
 
   .nav-logo {
