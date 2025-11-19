@@ -64,7 +64,6 @@
   overflow: hidden;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Ombre plus foncée */
   width: 100%; /* L'image prend toute la largeur de la carte */
-  max-width: 1711.5px; /* Division de la taille de l'image par 2 */
   height: auto;
   display: flex;
   justify-content: center;
@@ -76,6 +75,7 @@
 .avant-apres-image {
   width: 100%;
   height: auto;
+  object-fit: contain; /* Ensure image fits within its container without cropping */
   display: block;
 }
 
@@ -140,5 +140,69 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .carousel-container {
+    max-width: 90%;
+  }
+  .avant-apres-container h2 {
+    font-size: 2.2rem;
+  }
+  .avant-apres-container p {
+    font-size: 1rem;
+  }
+  .carousel-arrow {
+    font-size: 2.5rem;
+    padding: 0 10px;
+  }
+  .testimonial-bubble {
+    margin-top: 30px;
+    padding: 15px 20px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .avant-apres-container {
+    padding: 2rem 0.5rem;
+  }
+  .avant-apres-container h2 {
+    font-size: 2rem;
+  }
+  .avant-apres-container p {
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+  .carousel-arrow {
+    font-size: 2rem;
+    padding: 0 5px;
+  }
+  .testimonial-bubble {
+    margin-top: 20px;
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .avant-apres-container h2 {
+    font-size: 1.8rem;
+  }
+  .avant-apres-container p {
+    font-size: 0.8rem;
+    margin-bottom: 1.5rem;
+  }
+  .carousel-arrow {
+    font-size: 1.5rem;
+  }
+  .testimonial-bubble {
+    margin-top: 15px;
+    padding: 8px 10px;
+    font-size: 0.8rem;
+    width: 95%;
   }
 }
