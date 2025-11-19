@@ -577,7 +577,7 @@ h2 {
   .main-nav.is-open ul a {
     font-size: 2rem;
     text-shadow: none;
-    color: var(--main-white); /* Ensure links are visible on dark overlay */
+    color: var(--main-red); /* Changed from var(--main-white) to var(--main-red) */
   }
 
   .nav-logo {
