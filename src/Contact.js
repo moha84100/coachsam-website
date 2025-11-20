@@ -56,12 +56,12 @@ function Contact() {
             <div className="info-card">
               <i className="fas fa-map-marker-alt"></i>
               <h4>Adresse</h4>
-              <p>Rue d'Espagne, 84100 Orange</p>
+              <p>84100 Orange</p>
             </div>
             <div className="info-card">
               <i className="fas fa-envelope"></i>
               <h4>Email</h4>
-              <p>samuel.coaching@gmail.com</p>
+              <p>samuel.coaching.84@gmail.com</p>
             </div>
             <div className="info-card">
               <i className="fas fa-phone"></i>
