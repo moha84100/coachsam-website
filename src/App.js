@@ -198,13 +198,18 @@ const MainPage = () => {
         </div>
         <h1>Transformez Votre Vie, Pas Seulement Votre Corps.</h1>
         <p>Rejoignez-moi et devenez la meilleure version de vous-même.</p>
-        <a href="#booking" className="cta-button">Réserver ma séance</a>
+        <a href="#booking" className="cta-button">Réserver votre appel</a>
       </div>
     </section>
 
     <section id="services">
       <h2>Mes Services</h2>
-      <p className="section-intro">Plus qu'un simple programme, je vous propose un partenariat. Mon approche n'est pas de vous imposer un plan, mais de le construire <strong>avec vous</strong>. Chaque service ci-dessous est une invitation à commencer un parcours où votre motivation et mon expertise se rencontrent pour atteindre, et dépasser, vos objectifs.</p>
+      <p className="section-intro">
+        Plus qu’un simple programme, je vous propose un travail d’équipe, vos envies avec mes solutions pour vous.
+        Je suis là pour que l’on travail ensemble, pas vous donner un programme, mais le construire de À à Z ensemble.
+        Chacun des services proposés ci-dessous, est là pour vous, pour vos objectifs, pour réaliser vos rêves.
+        Il n’y a pas de solution mieux que d’autre, il y en a des + adaptées selon votre profil.
+      </p>
       <div className="services-grid">
         <AnimatedServiceCard 
           animationDirection="from-left"
@@ -264,10 +269,23 @@ const MainPage = () => {
 
     <section id="about" className="about-section">
       <div ref={aboutRef} className={`about-content ${aboutInView ? 'is-visible' : ''}`}>
-        <h2>Le Coach derriere les resultats</h2>
-        <p className="award-text">Élu Meilleur Coach de France</p>
-        <p>Ancien athlète de haut niveau, ma passion est de traduire la science de la performance en résultats concrets pour vous. Ma méthode n'est pas universelle, elle est personnelle. Je m'engage à comprendre vos objectifs, à respecter vos limites et à construire, ensemble, le chemin le plus efficace vers votre meilleure version.</p>
+        <h2>Le coach derrière les résultats</h2>
+        <p className="award-text">Élu meilleur coach de France 🇫🇷</p>
+        <p>Passionné de sport depuis toujours, mais lorsque j’ai découvert que je pouvais aider a améliorer des vie a travers le sport, je n’ai pas hésité.
+Mon approche du coaching est de vous rendre autonome dans votre vie sportive / nutritionnelle, afin que l’on atteigne ensemble vos objectifs et que vous puissiez battre de vos propres ailes par la suite.
+Si vous doutez de vous, je vous montrez que vous méritez mieux que ce simple doute.</p>
       </div>
+    </section>
+
+    <section id="nutrition-pillars">
+      <h2>5 Piliers Nutrition</h2>
+      <ol>
+        <li>Manger équilibré : un repas avec protéines, glucides complexes et légumes.</li>
+        <li>Privilégier le naturel : aliments frais et peu transformés.</li>
+        <li>S’hydrater suffisamment : eau tout au long de la journée.</li>
+        <li>Adapter les portions à l’objectif : perte de poids, prise de masse ou maintien.</li>
+        <li>Être régulier : des habitudes simples et constantes pour progresser durablement.</li>
+      </ol>
     </section>
 
     <section id="blog">
@@ -277,31 +295,17 @@ const MainPage = () => {
     <section id="contact" className="contact-section">
       <div ref={contactRef} className={`contact-content-wrapper ${contactInView ? 'is-visible' : ''}`}>
         <h2>Prêt à commencer ?</h2>
-        <p className="section-intro">Contactez-moi pour toute question ou pour planifier votre première séance. C'est le premier pas vers votre nouvelle vie.</p>
         <div className="contact-grid">
-          <div className="contact-form-container">
-            <form onSubmit={handleSubmit}>
-              <input type="text" placeholder="Votre Nom" required value={name} onChange={(e) => setName(e.target.value)} />
-              <input type="email" placeholder="Votre Email" required value={email} onChange={(e) => setEmail(e.target.value)} />
-              <textarea placeholder="Votre message..." value={message} onChange={(e) => setMessage(e.target.value)}></textarea>
-              <button type="submit">Envoyer le Message</button>
-            </form>
-          </div>
           <div className="contact-info-container">
             <div className="info-card">
               <i className="fas fa-map-marker-alt"></i>
               <h4>Adresse</h4>
-              <p>Rue d'Espagne, 84100 Orange</p>
+              <p>Orange 84100</p>
             </div>
             <div className="info-card">
               <i className="fas fa-envelope"></i>
               <h4>Email</h4>
-              <p>samuel.coaching@gmail.com</p>
-            </div>
-            <div className="info-card">
-              <i className="fas fa-phone"></i>
-              <h4>Téléphone</h4>
-              <p>07 67 61 44 46</p>
+              <p>Samuel.coaching.84@gmail.com</p>
             </div>
             <div className="social-links-contact">
               <a href="https://www.facebook.com/p/Samuel-Wehbe-100093540156811/"><i className="fab fa-facebook-f"></i></a>
@@ -393,7 +397,7 @@ function App() {
               <li><Link to="/#hero" onClick={toggleMenu}>Accueil</Link></li>
               <li><Link to="/#services" onClick={toggleMenu}>Services</Link></li>
               <li><Link to="/#testimonials" onClick={toggleMenu}>Témoignages</Link></li>
-              <li><Link to="/#booking" onClick={toggleMenu}>Réserver</Link></li>
+              <li><Link to="/#booking" onClick={toggleMenu}>Réserver votre appel</Link></li>
               <li><Link to="/avant-apres" onClick={toggleMenu}>Avant Après</Link></li>
               <li><Link to="/outils" onClick={toggleMenu}>Outils</Link></li>
               <li><Link to="/questionnaire" onClick={toggleMenu}>Questionnaire</Link></li>
