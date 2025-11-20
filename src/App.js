@@ -263,7 +263,7 @@ const MainPage = () => {
     </section>
 
     <section id="booking">
-      <h2>Réservez Votre Séance</h2>
+      <h2>Réservez Votre Appel</h2>
       <InlineWidget url="https://calendly.com/mohamed-echchkoubi/30min" />
     </section>
 
