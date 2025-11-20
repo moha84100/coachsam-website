@@ -277,17 +277,6 @@ Si vous doutez de vous, je vous montrez que vous méritez mieux que ce simple do
       </div>
     </section>
 
-    <section id="nutrition-pillars">
-      <h2>5 Piliers Nutrition</h2>
-      <ol>
-        <li>Manger équilibré : un repas avec protéines, glucides complexes et légumes.</li>
-        <li>Privilégier le naturel : aliments frais et peu transformés.</li>
-        <li>S’hydrater suffisamment : eau tout au long de la journée.</li>
-        <li>Adapter les portions à l’objectif : perte de poids, prise de masse ou maintien.</li>
-        <li>Être régulier : des habitudes simples et constantes pour progresser durablement.</li>
-      </ol>
-    </section>
-
     <section id="blog">
       <Blog />
     </section>

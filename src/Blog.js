@@ -32,7 +32,15 @@ const articles = [
     category: 'Nutrition & Alimentation',
     title: "Les 5 Piliers d'une Nutrition Sportive Réussie",
     summary: "Les bases pour optimiser votre énergie et récupération.",
-    fullContent: `...` // Keep existing content
+    fullContent: `
+      <ol>
+        <li><strong>Manger équilibré :</strong> un repas avec protéines, glucides complexes et légumes.</li>
+        <li><strong>Privilégier le naturel :</strong> aliments frais et peu transformés.</li>
+        <li><strong>S’hydrater suffisamment :</strong> eau tout au long de la journée.</li>
+        <li><strong>Adapter les portions à l’objectif :</strong> perte de poids, prise de masse ou maintien.</li>
+        <li><strong>Être régulier :</strong> des habitudes simples et constantes pour progresser durablement.</li>
+      </ol>
+    `
   },
   {
     category: 'Nutrition & Alimentation',
