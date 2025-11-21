@@ -203,40 +203,38 @@ const MainPage = () => {
     </section>
 
     <section id="services">
-      <h2>Mes Services</h2>
+      <h2>Mes solutions</h2>
       <p className="section-intro">
-        Plus qu’un simple programme, je vous propose un travail d’équipe, vos envies avec mes solutions pour vous.
-        Je suis là pour que l’on travail ensemble, pas vous donner un programme, mais le construire de À à Z ensemble.
-        Chacun des services proposés ci-dessous, est là pour vous, pour vos objectifs, pour réaliser vos rêves.
-        Il n’y a pas de solution mieux que d’autre, il y en a des + adaptées selon votre profil.
+        Chacune des solutions proposées ci-dessous.
+        Il n’y a pas de solution meilleure que d’autres, il y en a des + adaptées selon vos besoins.
       </p>
       <div className="services-grid">
         <AnimatedServiceCard 
           animationDirection="from-left"
           icon="fa-user-shield"
-          title="Coaching Individuel"
-          description="Un suivi 100% personnalisé pour des résultats optimaux. Bilan complet, programme sur mesure et motivation constante."
+          title="solution gold"
+          description="Accompagnement sur mesure avec : programme sportif / alimentaire personnalisé, suivi sportif / alimentaire hebdomadaire, 4 coachings par mois en présentiel / distanciel, bilan complet mensuel, consulting 24h/24"
           buttonText="Commencer"
         />
         <AnimatedServiceCard 
           animationDirection="from-right"
           icon="fa-users"
-          title="Entrainement en distencielle"
-          description="Rejoignez des entraînements à distance en direct. Des sessions interactives pour vous dépasser depuis chez vous."
+          title="solution premium"
+          description="Accompagnement sur mesure avec : programme sportif / alimentaire personnalisé, suivi sportif / alimentaire hebdomadaire, 2 coachings par mois en présentiel / distanciel, bilan complet mensuel"
           buttonText="Rejoindre"
         />
         <AnimatedServiceCard 
           animationDirection="from-left"
           icon="fa-laptop-code"
-          title="Programmes en Ligne"
-          description="La flexibilité d'un entraînement de qualité, où que vous soyez. Accès à des vidéos, des plans et un suivi à distance."
+          title="solution essentielle"
+          description="Accompagnement sur mesure avec : programme sportif / alimentaire personnalisé, suivi sportif / alimentaire hebdomadaire, bilan complet mensuel"
           buttonText="Découvrir"
         />
         <AnimatedServiceCard 
           animationDirection="from-right"
           icon="fa-dumbbell"
-          title="Préparation Physique"
-          description="Optimisez vos performances pour une compétition ou un événement sportif. Planification ciblée pour atteindre votre pic de forme."
+          title="préparation physique"
+          description="Accompagnement sur mesure avec : programmation selon les échéances sportives de l’athlète, accompagnement sur le plan mental et physiologique des athlètes en vue de leur compétition, 4 coachings par mois en présentiel / distanciel, bilan complet mensuel, consulting 24h/24"
           buttonText="Se préparer"
         />
       </div>
@@ -271,9 +269,9 @@ const MainPage = () => {
       <div ref={aboutRef} className={`about-content ${aboutInView ? 'is-visible' : ''}`}>
         <h2>Le coach derrière les résultats</h2>
         <p className="award-text">Élu meilleur coach de France 🇫🇷</p>
-        <p>Passionné de sport depuis toujours, mais lorsque j’ai découvert que je pouvais aider a améliorer des vie a travers le sport, je n’ai pas hésité.
+        <p>Passionné de sport depuis toujours, mais lorsque j’ai découvert que je pouvais aider à améliorer des vies a travers le sport, je n’ai pas hésité.
 Mon approche du coaching est de vous rendre autonome dans votre vie sportive / nutritionnelle, afin que l’on atteigne ensemble vos objectifs et que vous puissiez battre de vos propres ailes par la suite.
-Si vous doutez de vous, je vous montrez que vous méritez mieux que ce simple doute.</p>
+Si vous doutez de vous, je vous montrerai que vous méritez mieux que ce simple doute.</p>
       </div>
     </section>
 

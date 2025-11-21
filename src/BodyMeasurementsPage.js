@@ -52,6 +52,7 @@ const BodyMeasurementsPage = () => {
     },
   ]);
   const [objective, setObjective] = useState('perte de gras');
+  const [diet, setDiet] = useState({ value: '', comment: '' });
 
   const objectives = [
     'perte de gras',
@@ -98,6 +99,16 @@ const BodyMeasurementsPage = () => {
     setObjective(e.target.value);
   };
 
+  const handleDietChange = (e) => {
+    const { value } = e.target;
+    setDiet((prev) => ({ ...prev, value }));
+  };
+
+  const handleDietCommentChange = (e) => {
+    const { value } = e.target;
+    setDiet((prev) => ({ ...prev, comment: value }));
+  };
+
   const handleEdit = () => {
     setIsEditing(true);
   };
@@ -112,6 +123,7 @@ const BodyMeasurementsPage = () => {
     // Here you would typically save the data to the backend
     console.log('Saving measurements:', measurements);
     console.log('Saving objective:', objective);
+    console.log('Saving diet:', diet);
   };
 
   const getComparisonColor = (key, currentValue, history) => {
@@ -197,15 +209,40 @@ const BodyMeasurementsPage = () => {
           </div>
         ))}
 
-        {isAdmin && (
-          <div className="actions">
+        <div className="diet-section">
+          <h3>Mon régime</h3>
+          {isEditing ? (
+            <textarea
+              value={diet.value}
+              onChange={handleDietChange}
+              placeholder="Décrivez votre régime alimentaire..."
+            />
+          ) : (
+            <p>{diet.value}</p>
+          )}
+          {isAdmin && (
+            <div className="comment-section">
+              {isEditing ? (
+                <input
+                  type="text"
+                  value={diet.comment}
+                  onChange={handleDietCommentChange}
+                  placeholder="Ajouter un commentaire sur le régime"
+                />
+              ) : (
+                diet.comment && <span className="measurement-comment">({diet.comment})</span>
+              )}
+            </div>
+          )}
+        </div>
+
+        <div className="actions">
             {isEditing ? (
               <button onClick={handleSave} className="save-btn">Sauvegarder</button>
             ) : (
               <button onClick={handleEdit} className="edit-btn">Modifier</button>
             )}
           </div>
-        )}
       </div>
 
       <div className="history-container">
