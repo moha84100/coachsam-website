@@ -172,6 +172,18 @@ const BodyMeasurementSchema = new mongoose.Schema({
 
 const BodyMeasurement = mongoose.model('BodyMeasurement', BodyMeasurementSchema);
 
+// Diet Schema
+const DietSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  repas: { type: String, required: true },
+  aliments: { type: String, required: true },
+  quantité: { type: String, required: true },
+  heure: { type: String, required: true },
+});
+
+const Diet = mongoose.model('Diet', DietSchema);
+
+
 // API Endpoints
 
 // Register a new user
@@ -554,6 +566,64 @@ app.delete('/api/programs/:id', adminAuth, async (req, res) => {
     res.status(500).json({ msg: 'Server error' });
   }
 });
+
+// Get all diet plans for a user (Admin only)
+app.get('/api/diet/:userId', adminAuth, async (req, res) => {
+  try {
+    const dietPlans = await Diet.find({ userId: req.params.userId });
+    res.json(dietPlans);
+  } catch (err) {
+    logError(err.message);
+    res.status(500).json({ msg: 'Server error' });
+  }
+});
+
+// Add a new diet plan (Admin only)
+app.post('/api/diet', adminAuth, async (req, res) => {
+  const { userId, repas, aliments, quantité, heure } = req.body;
+  try {
+    const newDietPlan = new Diet({ userId, repas, aliments, quantité, heure });
+    await newDietPlan.save();
+    res.json(newDietPlan);
+  } catch (err) {
+    logError(err.message);
+    res.status(500).json({ msg: 'Server error' });
+  }
+});
+
+// Update a diet plan (Admin only)
+app.put('/api/diet/:id', adminAuth, async (req, res) => {
+  const { repas, aliments, quantité, heure } = req.body;
+  try {
+    const updatedDietPlan = await Diet.findByIdAndUpdate(
+      req.params.id,
+      { repas, aliments, quantité, heure },
+      { new: true }
+    );
+    if (!updatedDietPlan) {
+      return res.status(404).json({ msg: 'Diet plan not found' });
+    }
+    res.json(updatedDietPlan);
+  } catch (err) {
+    logError(err.message);
+    res.status(500).json({ msg: 'Server error' });
+  }
+});
+
+// Delete a diet plan (Admin only)
+app.delete('/api/diet/:id', adminAuth, async (req, res) => {
+  try {
+    const deletedDietPlan = await Diet.findByIdAndDelete(req.params.id);
+    if (!deletedDietPlan) {
+      return res.status(404).json({ msg: 'Diet plan not found' });
+    }
+    res.json({ msg: 'Diet plan removed' });
+  } catch (err) {
+    logError(err.message);
+    res.status(500).json({ msg: 'Server error' });
+  }
+});
+
 
 // Global error handling middleware
 app.use((err, req, res, next) => {
