@@ -175,6 +175,7 @@ const BodyMeasurement = mongoose.model('BodyMeasurement', BodyMeasurementSchema)
 // Diet Schema
 const DietSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  jour: { type: String, required: true },
   repas: { type: String, required: true },
   aliments: { type: String, required: true },
   quantité: { type: String, required: true },
@@ -587,9 +588,9 @@ app.get('/api/diet/:userId', auth, async (req, res) => {
 
 // Add a new diet plan (Admin only)
 app.post('/api/diet', adminAuth, async (req, res) => {
-  const { userId, repas, aliments, quantité, heure } = req.body;
+  const { userId, jour, repas, aliments, quantité, heure } = req.body;
   try {
-    const newDietPlan = new Diet({ userId, repas, aliments, quantité, heure });
+    const newDietPlan = new Diet({ userId, jour, repas, aliments, quantité, heure });
     await newDietPlan.save();
     res.json(newDietPlan);
   } catch (err) {
@@ -600,11 +601,11 @@ app.post('/api/diet', adminAuth, async (req, res) => {
 
 // Update a diet plan (Admin only)
 app.put('/api/diet/:id', adminAuth, async (req, res) => {
-  const { repas, aliments, quantité, heure } = req.body;
+  const { jour, repas, aliments, quantité, heure } = req.body;
   try {
     const updatedDietPlan = await Diet.findByIdAndUpdate(
       req.params.id,
-      { repas, aliments, quantité, heure },
+      { jour, repas, aliments, quantité, heure },
       { new: true }
     );
     if (!updatedDietPlan) {

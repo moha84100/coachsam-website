@@ -10,6 +10,33 @@
     color: #333;
   }
   
+  .day-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .day-tab {
+    padding: 0.75rem 1.5rem;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    margin: 0.25rem;
+    border-radius: 4px;
+  }
+  
+  .day-tab:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .day-tab.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+  }
+  
   .diet-form {
     display: flex;
     flex-direction: column;
@@ -24,7 +51,8 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
-  .diet-form input {
+  .diet-form input,
+  .diet-form select {
     padding: 0.75rem;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -117,6 +145,16 @@
   
     .diet-table button {
       padding: 0.25rem 0.5rem;
+    }
+  
+    .day-tabs {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .day-tab {
+      width: 100%;
+      box-sizing: border-box;
     }
   }
   
