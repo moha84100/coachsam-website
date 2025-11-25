@@ -297,7 +297,7 @@ const adminAuth = async (req, res, next) => {
 app.get('/api/auth/check-admin', auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select('-password');
-    res.json({ isAdmin: user.isAdmin });
+    res.json({ isAdmin: user.isAdmin, userId: req.user.id });
   } catch (err) {
     logError(err.message);
     res.status(500).json({ msg: 'Server error' });

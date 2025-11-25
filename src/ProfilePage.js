@@ -23,7 +23,7 @@ const localizer = dateFnsLocalizer({
   locales,
 });
 
-const ProfilePage = () => {
+const ProfilePage = ({ isAdmin, token, userId }) => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -35,7 +35,6 @@ const ProfilePage = () => {
 
   const fetchPrograms = useCallback(async () => {
     setLoading(true);
-    const token = localStorage.getItem('token');
     if (!token) {
       setError('Vous n\'êtes pas connecté.');
       setLoading(false);
@@ -64,11 +63,13 @@ const ProfilePage = () => {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [token]);
 
   useEffect(() => {
-    fetchPrograms();
-  }, [fetchPrograms]);
+    if (token) {
+      fetchPrograms();
+    }
+  }, [token, fetchPrograms]);
 
   // Handlers for calendar navigation
   const handleNavigate = (newDate) => {
@@ -92,9 +93,16 @@ const ProfilePage = () => {
     <div className="profile-container">
       <div className="profile-header">
         <h2>Mon Programme</h2>
-        <button className="body-measurements-btn" onClick={() => navigate('/profile/body-measurements')}>
-          Mon corps
-        </button>
+        <div>
+          <button className="body-measurements-btn" onClick={() => navigate('/profile/body-measurements')}>
+            Mon corps
+          </button>
+          {isAdmin && userId && (
+            <button className="diet-btn" onClick={() => navigate(`/profile/diet/${userId}`)}>
+              Modifier la diète
+            </button>
+          )}
+        </div>
       </div>
       <p>Consultez votre planning d'entraînement. Cliquez sur un événement pour voir les détails.</p>
       <div style={{ height: '75vh', marginTop: '2rem' }}>

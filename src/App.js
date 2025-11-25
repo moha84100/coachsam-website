@@ -15,6 +15,7 @@ import AdminPage from './AdminPage';
 import UserProgramCalendar from './UserProgramCalendar';
 import SessionPage from './SessionPage';
 import BodyMeasurementsPage from './BodyMeasurementsPage';
+import DietPage from './DietPage'; 
 import apiUrl from './apiConfig';
 
 // Animated Service Card Component
@@ -314,6 +315,7 @@ function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [isAuthenticated, setIsAuthenticated] = useState(!!token);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [userId, setUserId] = useState(null);
 
   // Effect to check admin status when authenticated
   useEffect(() => {
@@ -328,6 +330,7 @@ function App() {
           if (response.ok) {
             const data = await response.json();
             setIsAdmin(data.isAdmin);
+            setUserId(data.userId);
             setIsAuthenticated(true);
           } else {
             // Invalid token, logout
@@ -340,6 +343,7 @@ function App() {
       } else {
         setIsAuthenticated(false);
         setIsAdmin(false);
+        setUserId(null);
       }
     };
     checkAdminStatus();
@@ -419,7 +423,8 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           
           {/* Protected Profile Route */}
-          <Route path="/profile" element={isAuthenticated ? <ProfilePage /> : <Navigate to="/login" />} />
+          <Route path="/profile" element={isAuthenticated ? <ProfilePage isAdmin={isAdmin} token={token} userId={userId} /> : <Navigate to="/login" />} />
+          <Route path="/profile/diet/:userId" element={isAuthenticated && isAdmin ? <DietPage /> : <Navigate to="/login" />} />
           <Route path="/profile/body-measurements" element={isAuthenticated ? <BodyMeasurementsPage /> : <Navigate to="/login" />} />
           
           {/* Protected Admin Route */}
