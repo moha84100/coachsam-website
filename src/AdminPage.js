@@ -44,6 +44,10 @@ const AdminPage = () => {
     navigate(`/admin/user/${userId}/body-measurements`);
   };
 
+  const handleManageDiet = (userId) => {
+    navigate(`/profile/diet/${userId}`);
+  };
+
   if (loading) return <div>Loading users...</div>;
   if (error) return <div style={{ color: 'red' }}>Error: {error}</div>;
 
@@ -70,7 +74,13 @@ const AdminPage = () => {
                   className="manage-body-btn"
                   onClick={() => handleManageBody(user._id)}
                 >
-                  Mon corps
+                  Gérer le corps
+                </button>
+                <button
+                  className="manage-diet-btn"
+                  onClick={() => handleManageDiet(user._id)}
+                >
+                  Gérer la diète
                 </button>
               </li>
             ))}
