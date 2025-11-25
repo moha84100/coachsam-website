@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 import apiUrl from './apiConfig';
 import './DietPage.css';
 
-const DietPage = () => {
-  const { userId } = useParams();
+const DietPage = ({ isAdmin, token, userId: currentUserId }) => {
+  const { userId } = useParams(); // userId from URL (can be current user or another user for admin)
   const [dietPlans, setDietPlans] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -17,10 +17,10 @@ const DietPage = () => {
   const [editingId, setEditingId] = useState(null);
 
   const fetchDietPlans = useCallback(async () => {
-    const token = localStorage.getItem('token');
+    const fetchToken = localStorage.getItem('token');
     try {
       const res = await fetch(`${apiUrl}/api/diet/${userId}`, {
-        headers: { 'x-auth-token': token },
+        headers: { 'x-auth-token': fetchToken },
       });
       if (!res.ok) throw new Error('Could not fetch diet plans');
       const data = await res.json();
@@ -42,13 +42,13 @@ const DietPage = () => {
 
   const handleAddDiet = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem('token');
+    const fetchToken = localStorage.getItem('token');
     try {
       const res = await fetch(`${apiUrl}/api/diet`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-auth-token': token,
+          'x-auth-token': fetchToken,
         },
         body: JSON.stringify({ ...formData, userId }),
       });
@@ -62,13 +62,13 @@ const DietPage = () => {
 
   const handleUpdateDiet = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem('token');
+    const fetchToken = localStorage.getItem('token');
     try {
       const res = await fetch(`${apiUrl}/api/diet/${editingId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'x-auth-token': token,
+          'x-auth-token': fetchToken,
         },
         body: JSON.stringify(formData),
       });
@@ -82,11 +82,11 @@ const DietPage = () => {
   };
 
   const handleDeleteDiet = async (id) => {
-    const token = localStorage.getItem('token');
+    const fetchToken = localStorage.getItem('token');
     try {
       const res = await fetch(`${apiUrl}/api/diet/${id}`, {
         method: 'DELETE',
-        headers: { 'x-auth-token': token },
+        headers: { 'x-auth-token': fetchToken },
       });
       if (!res.ok) throw new Error('Could not delete diet plan');
       await fetchDietPlans();
@@ -112,14 +112,16 @@ const DietPage = () => {
     <div className="diet-container">
       <h2>Plan de régime pour l'utilisateur {userId}</h2>
 
-      <form onSubmit={editingId ? handleUpdateDiet : handleAddDiet} className="diet-form">
-        <input name="repas" value={formData.repas} onChange={handleChange} placeholder="Repas" required />
-        <input name="aliments" value={formData.aliments} onChange={handleChange} placeholder="Aliments" required />
-        <input name="quantité" value={formData.quantité} onChange={handleChange} placeholder="Quantité" required />
-        <input name="heure" value={formData.heure} onChange={handleChange} placeholder="Heure" required />
-        <button type="submit">{editingId ? 'Mettre à jour' : 'Ajouter'}</button>
-        {editingId && <button onClick={() => { setEditingId(null); setFormData({ repas: '', aliments: '', quantité: '', heure: '' }); }}>Annuler</button>}
-      </form>
+      {isAdmin && (
+        <form onSubmit={editingId ? handleUpdateDiet : handleAddDiet} className="diet-form">
+          <input name="repas" value={formData.repas} onChange={handleChange} placeholder="Repas" required />
+          <input name="aliments" value={formData.aliments} onChange={handleChange} placeholder="Aliments" required />
+          <input name="quantité" value={formData.quantité} onChange={handleChange} placeholder="Quantité" required />
+          <input name="heure" value={formData.heure} onChange={handleChange} placeholder="Heure" required />
+          <button type="submit">{editingId ? 'Mettre à jour' : 'Ajouter'}</button>
+          {editingId && <button onClick={() => { setEditingId(null); setFormData({ repas: '', aliments: '', quantité: '', heure: '' }); }}>Annuler</button>}
+        </form>
+      )}
 
       <table className="diet-table">
         <thead>
@@ -128,7 +130,7 @@ const DietPage = () => {
             <th>Aliments</th>
             <th>Quantité</th>
             <th>Heure</th>
-            <th>Actions</th>
+            {isAdmin && <th>Actions</th>}
           </tr>
         </thead>
         <tbody>
@@ -138,10 +140,12 @@ const DietPage = () => {
               <td>{plan.aliments}</td>
               <td>{plan.quantité}</td>
               <td>{plan.heure}</td>
-              <td>
-                <button onClick={() => startEditing(plan)}>Modifier</button>
-                <button onClick={() => handleDeleteDiet(plan._id)}>Supprimer</button>
-              </td>
+              {isAdmin && (
+                <td>
+                  <button onClick={() => startEditing(plan)}>Modifier</button>
+                  <button onClick={() => handleDeleteDiet(plan._id)}>Supprimer</button>
+                </td>
+              )}
             </tr>
           ))}
         </tbody>

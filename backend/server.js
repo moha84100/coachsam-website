@@ -567,9 +567,16 @@ app.delete('/api/programs/:id', adminAuth, async (req, res) => {
   }
 });
 
-// Get all diet plans for a user (Admin only)
-app.get('/api/diet/:userId', adminAuth, async (req, res) => {
+// Get all diet plans for a user (Authenticated users and Admin)
+app.get('/api/diet/:userId', auth, async (req, res) => {
   try {
+    // Security check: ensure the user can only access their own diet plan, or the user is an admin
+    if (req.user.id !== req.params.userId) {
+      const adminUser = await User.findById(req.user.id);
+      if (!adminUser.isAdmin) {
+        return res.status(403).json({ msg: 'User not authorized' });
+      }
+    }
     const dietPlans = await Diet.find({ userId: req.params.userId });
     res.json(dietPlans);
   } catch (err) {

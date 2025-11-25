@@ -424,7 +424,7 @@ function App() {
           
           {/* Protected Profile Route */}
           <Route path="/profile" element={isAuthenticated ? <ProfilePage isAdmin={isAdmin} token={token} userId={userId} /> : <Navigate to="/login" />} />
-          <Route path="/profile/diet/:userId" element={isAuthenticated && isAdmin ? <DietPage /> : <Navigate to="/login" />} />
+          <Route path="/profile/diet/:userId" element={isAuthenticated ? <DietPage isAdmin={isAdmin} token={token} userId={userId} /> : <Navigate to="/login" />} />
           <Route path="/profile/body-measurements" element={isAuthenticated ? <BodyMeasurementsPage /> : <Navigate to="/login" />} />
           
           {/* Protected Admin Route */}

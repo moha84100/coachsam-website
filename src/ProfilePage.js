@@ -97,9 +97,9 @@ const ProfilePage = ({ isAdmin, token, userId }) => {
           <button className="body-measurements-btn" onClick={() => navigate('/profile/body-measurements')}>
             Mon corps
           </button>
-          {isAdmin && userId && (
+          {userId && (
             <button className="diet-btn" onClick={() => navigate(`/profile/diet/${userId}`)}>
-              Modifier la diète
+              Voir / Modifier la diète
             </button>
           )}
         </div>
