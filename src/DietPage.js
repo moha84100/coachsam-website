@@ -8,6 +8,46 @@ const DietPage = ({ isAdmin, token, userId: currentUserId }) => {
   const [dietNotes, setDietNotes] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [userName, setUserName] = useState('Chargement du nom...');
+
+  const fetchUserName = useCallback(async () => {
+    const fetchToken = localStorage.getItem('token');
+    try {
+      const res = await fetch(`${apiUrl}/api/users/${userId}`, {
+          headers: { 'x-auth-token': fetchToken },
+      });
+
+      if (!res.ok) {
+          // If the user being viewed is the current user, try to get their name from local storage
+          // This assumes the name is stored during login, which is good practice.
+          if (userId === currentUserId) {
+            const storedUserName = localStorage.getItem('userName'); // Assuming 'userName' is stored
+            if (storedUserName) {
+              setUserName(storedUserName);
+              return;
+            }
+          }
+          setUserName('Utilisateur Inconnu');
+          return;
+      }
+      const userData = await res.json();
+      setUserName(userData.name || 'Utilisateur Inconnu');
+    } catch (err) {
+      console.error("Error fetching user name:", err);
+      // Fallback to local storage if API call fails for current user
+      if (userId === currentUserId) {
+        const storedUserName = localStorage.getItem('userName');
+        if (storedUserName) {
+          setUserName(storedUserName);
+        } else {
+          setUserName('Utilisateur Inconnu');
+        }
+      } else {
+        setUserName('Utilisateur Inconnu');
+      }
+    }
+  }, [userId, currentUserId]);
+
 
   const fetchDietNotes = useCallback(async () => {
     const fetchToken = localStorage.getItem('token');
@@ -33,13 +73,15 @@ const DietPage = ({ isAdmin, token, userId: currentUserId }) => {
 
   useEffect(() => {
     fetchDietNotes();
-  }, [fetchDietNotes]);
+    fetchUserName();
+  }, [fetchDietNotes, fetchUserName]);
 
   const handleSaveNotes = async (e) => {
     e.preventDefault();
     const fetchToken = localStorage.getItem('token');
+    // Determine if we need to create (POST) or update (PUT)
     const method = dietNotes ? 'PUT' : 'POST';
-    const url = dietNotes ? `${apiUrl}/api/diet/${userId}/notes` : `${apiUrl}/api/diet/notes`;
+    const url = `${apiUrl}/api/diet/notes`; // POST always goes to /api/diet/notes
 
     try {
       const res = await fetch(url, {
@@ -62,9 +104,9 @@ const DietPage = ({ isAdmin, token, userId: currentUserId }) => {
 
   return (
     <div className="diet-container">
-      <h2>Notes de régime pour l'utilisateur {userId}</h2>
+      <h2>Notes de régime pour {userName}</h2>
 
-      {isAdmin ? (
+      {isAdmin || (userId === currentUserId) ? ( // Allow current user to edit their own notes
         <form onSubmit={handleSaveNotes} className="diet-notes-form">
           <textarea
             name="dietNotes"
