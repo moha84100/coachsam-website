@@ -324,6 +324,33 @@ app.get('/api/users', adminAuth, async (req, res) => {
   }
 });
 
+// Get a single user by ID (Authenticated user or Admin)
+app.get('/api/users/:userId', auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.params.userId).select('-password');
+
+    if (!user) {
+      return res.status(404).json({ msg: 'User not found' });
+    }
+
+    // Security check: ensure the user can only access their own profile, or the requester is an admin
+    if (req.user.id !== req.params.userId) {
+      const adminUser = await User.findById(req.user.id);
+      if (!adminUser.isAdmin) {
+        return res.status(403).json({ msg: 'User not authorized to access this profile' });
+      }
+    }
+
+    res.json({ name: user.name, email: user.email });
+  } catch (err) {
+    logError(err.message);
+    if (err.kind === 'ObjectId') {
+      return res.status(404).json({ msg: 'User not found' });
+    }
+    res.status(500).json({ msg: 'Server error' });
+  }
+});
+
 // Grant admin rights to a user (Admin only)
 app.put('/api/users/:id/make-admin', adminAuth, async (req, res) => {
   try {
