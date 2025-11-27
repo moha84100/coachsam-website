@@ -174,12 +174,8 @@ const BodyMeasurement = mongoose.model('BodyMeasurement', BodyMeasurementSchema)
 
 // Diet Schema
 const DietSchema = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  jour: { type: String, required: true },
-  repas: { type: String, required: true },
-  aliments: { type: String, required: true },
-  quantité: { type: String, required: true },
-  heure: { type: String, required: true },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true, unique: true },
+  notes: { type: String, default: '' },
 });
 
 const Diet = mongoose.model('Diet', DietSchema);
@@ -568,80 +564,138 @@ app.delete('/api/programs/:id', adminAuth, async (req, res) => {
   }
 });
 
-// Get all diet plans for a user (Authenticated users and Admin)
-app.get('/api/diet/:userId', auth, async (req, res) => {
+// Get diet notes for a user (Authenticated users and Admin)
+
+app.get('/api/diet/:userId/notes', auth, async (req, res) => {
+
   try {
-    // Security check: ensure the user can only access their own diet plan, or the user is an admin
+
+    // Security check: ensure the user can only access their own diet notes, or the user is an admin
+
     if (req.user.id !== req.params.userId) {
+
       const adminUser = await User.findById(req.user.id);
+
       if (!adminUser.isAdmin) {
+
         return res.status(403).json({ msg: 'User not authorized' });
+
       }
+
     }
-    const dietPlans = await Diet.find({ userId: req.params.userId });
-    res.json(dietPlans);
+
+
+
+    const dietEntry = await Diet.findOne({ userId: req.params.userId });
+
+
+
+    if (!dietEntry) {
+
+      return res.status(404).json({ msg: 'Diet notes not found for this user' });
+
+    }
+
+
+
+    res.json({ notes: dietEntry.notes });
+
   } catch (err) {
+
     logError(err.message);
+
     res.status(500).json({ msg: 'Server error' });
+
   }
+
 });
 
-// Add a new diet plan (Admin only)
-app.post('/api/diet', adminAuth, async (req, res) => {
-  const { userId, jour, repas, aliments, quantité, heure } = req.body;
+
+
+// Create or Update diet notes for a user (Authenticated users and Admin)
+
+app.post('/api/diet/notes', auth, async (req, res) => {
+
+  const { userId, notes } = req.body;
+
+
+
   try {
-    const newDietPlan = new Diet({ userId, jour, repas, aliments, quantité, heure });
-    await newDietPlan.save();
-    res.json(newDietPlan);
+
+    // Security check: ensure the user can only modify their own diet notes, or the user is an admin
+
+    if (req.user.id !== userId) {
+
+      const adminUser = await User.findById(req.user.id);
+
+      if (!adminUser.isAdmin) {
+
+        return res.status(403).json({ msg: 'User not authorized to modify these notes' });
+
+      }
+
+    }
+
+
+
+    let dietEntry = await Diet.findOne({ userId });
+
+
+
+    if (dietEntry) {
+
+      // Update existing notes
+
+      dietEntry.notes = notes;
+
+    } else {
+
+      // Create new notes entry
+
+      dietEntry = new Diet({ userId, notes });
+
+    }
+
+
+
+    await dietEntry.save();
+
+    res.json(dietEntry);
+
   } catch (err) {
+
     logError(err.message);
+
     res.status(500).json({ msg: 'Server error' });
+
   }
+
 });
 
-// Update a diet plan (Admin only)
-app.put('/api/diet/:id', adminAuth, async (req, res) => {
-  const { jour, repas, aliments, quantité, heure } = req.body;
-  try {
-    const updatedDietPlan = await Diet.findByIdAndUpdate(
-      req.params.id,
-      { jour, repas, aliments, quantité, heure },
-      { new: true }
-    );
-    if (!updatedDietPlan) {
-      return res.status(404).json({ msg: 'Diet plan not found' });
-    }
-    res.json(updatedDietPlan);
-  } catch (err) {
-    logError(err.message);
-    res.status(500).json({ msg: 'Server error' });
-  }
-});
-
-// Delete a diet plan (Admin only)
-app.delete('/api/diet/:id', adminAuth, async (req, res) => {
-  try {
-    const deletedDietPlan = await Diet.findByIdAndDelete(req.params.id);
-    if (!deletedDietPlan) {
-      return res.status(404).json({ msg: 'Diet plan not found' });
-    }
-    res.json({ msg: 'Diet plan removed' });
-  } catch (err) {
-    logError(err.message);
-    res.status(500).json({ msg: 'Server error' });
-  }
-});
 
 
 // Global error handling middleware
+
 app.use((err, req, res, next) => {
+
   logError(err.stack); // Log the full stack trace for debugging
+
   res.status(err.statusCode || 500).json({
+
     msg: err.message || 'An unexpected server error occurred',
+
     error: process.env.NODE_ENV === 'development' ? err.stack : undefined, // Provide stack trace in development
+
   });
+
 });
 
+
+
 app.listen(port, () => {
+
   console.log(`Serveur en écoute sur le port ${port}`);
+
 });
+
+

@@ -2,6 +2,9 @@
     padding: 2rem;
     background-color: #f9f9f9;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
   .diet-container h2 {
@@ -10,56 +13,29 @@
     color: #333;
   }
   
-  .day-tabs {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
-  }
-  
-  .day-tab {
-    padding: 0.75rem 1.5rem;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-    margin: 0.25rem;
-    border-radius: 4px;
-  }
-  
-  .day-tab:hover {
-    background-color: #f0f0f0;
-  }
-  
-  .day-tab.active {
-    background-color: #007bff;
-    color: white;
-    border-color: #007bff;
-  }
-  
-  .diet-form {
+  .diet-notes-form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    margin-bottom: 2rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    width: 100%;
+    max-width: 800px; /* Adjust as needed */
     padding: 2rem;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
-  .diet-form input,
-  .diet-form select {
-    padding: 0.75rem;
+  .diet-notes-form textarea {
+    width: 100%;
+    padding: 1rem;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 1rem;
+    min-height: 200px; /* Adjust as needed */
+    resize: vertical; /* Allow vertical resizing */
   }
   
-  .diet-form button {
+  .diet-notes-form button {
     padding: 0.75rem;
     border: none;
     border-radius: 4px;
@@ -68,93 +44,42 @@
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s;
+    align-self: flex-end; /* Align button to the right */
   }
   
-  .diet-form button:hover {
+  .diet-notes-form button:hover {
     background-color: #0056b3;
   }
   
-  .diet-form button[type="submit"] {
-    background-color: #28a745;
-  }
-  
-  .diet-form button[type="submit"]:hover {
-    background-color: #218838;
-  }
-  
-  .diet-table {
+  .diet-notes-display {
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 2rem;
+    max-width: 800px;
+    padding: 2rem;
     background-color: #fff;
+    border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
-  .diet-table th,
-  .diet-table td {
-    padding: 1rem;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+  .diet-notes-display h3 {
+    margin-bottom: 1rem;
+    color: #555;
   }
   
-  .diet-table th {
-    background-color: #f2f2f2;
-  }
-  
-  .diet-table tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  .diet-table button {
-    margin-right: 0.5rem;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .diet-table button:first-of-type {
-    background-color: #ffc107;
-  }
-  
-  .diet-table button:first-of-type:hover {
-    background-color: #e0a800;
-  }
-  
-  .diet-table button:last-of-type {
-    background-color: #dc3545;
-    color: white;
-  }
-  
-  .diet-table button:last-of-type:hover {
-    background-color: #c82333;
+  .diet-notes-display p {
+    white-space: pre-wrap; /* Preserve whitespace and line breaks */
+    font-size: 1rem;
+    color: #333;
   }
   
   @media (max-width: 768px) {
-    .diet-table, .diet-form {
+    .diet-notes-form,
+    .diet-notes-display {
       width: 95%;
-      margin-left: auto;
-      margin-right: auto;
+      padding: 1rem;
     }
   
-    .diet-table th,
-    .diet-table td {
-      padding: 0.5rem;
-    }
-  
-    .diet-table button {
-      padding: 0.25rem 0.5rem;
-    }
-  
-    .day-tabs {
-      flex-direction: column;
-      align-items: stretch;
-    }
-  
-    .day-tab {
-      width: 100%;
-      box-sizing: border-box;
+    .diet-notes-form button {
+      align-self: stretch; /* Full width button on small screens */
     }
   }
   
