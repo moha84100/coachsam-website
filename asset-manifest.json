@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/coachsam-website/static/css/main.fd4e602a.css",
-    "main.js": "/coachsam-website/static/js/main.16005410.js",
+    "main.css": "/coachsam-website/static/css/main.60857cc5.css",
+    "main.js": "/coachsam-website/static/js/main.3f2c7bb2.js",
     "static/js/453.deff59fe.chunk.js": "/coachsam-website/static/js/453.deff59fe.chunk.js",
     "index.html": "/coachsam-website/index.html",
-    "main.fd4e602a.css.map": "/coachsam-website/static/css/main.fd4e602a.css.map",
-    "main.16005410.js.map": "/coachsam-website/static/js/main.16005410.js.map",
+    "main.60857cc5.css.map": "/coachsam-website/static/css/main.60857cc5.css.map",
+    "main.3f2c7bb2.js.map": "/coachsam-website/static/js/main.3f2c7bb2.js.map",
     "453.deff59fe.chunk.js.map": "/coachsam-website/static/js/453.deff59fe.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.fd4e602a.css",
-    "static/js/main.16005410.js"
+    "static/css/main.60857cc5.css",
+    "static/js/main.3f2c7bb2.js"
   ]
 }
