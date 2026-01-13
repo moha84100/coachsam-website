@@ -56,14 +56,14 @@
 }
 
 .exercise-list li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: flex; /* Change to flex */
+  flex-direction: column; /* Stack children vertically */
+  align-items: flex-start; /* Align items to the start */
   padding: 1rem;
   background-color: #fff;
   border-radius: 8px;
   margin-bottom: 1rem;
-  cursor: pointer;
+  /* cursor: pointer; */ /* Remove cursor for non-clickable list item */
   transition: transform 0.2s, box-shadow 0.2s;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
@@ -71,6 +71,14 @@
 .exercise-list li:hover {
   transform: translateY(-3px);
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.exercise-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 0.5rem;
 }
 
 .exercise-name {
@@ -86,6 +94,7 @@
 .video-icon {
   color: #007bff;
   font-size: 1.5rem;
+  cursor: pointer; /* Keep cursor for video icon */
 }
 
 .video-player {
@@ -100,6 +109,80 @@
   border-radius: 8px;
 }
 
+/* Performance Inputs */
+.performance-inputs {
+  width: 100%;
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+  border-top: 1px dashed #eee;
+}
+
+.performance-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.performance-row span {
+  font-weight: bold;
+  color: #555;
+  min-width: 60px; /* Ensure "Série X :" is aligned */
+}
+
+.performance-inputs input[type="number"] {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  -moz-appearance: textfield; /* Firefox */
+}
+
+.performance-inputs input[type="number"]::-webkit-outer-spin-button,
+.performance-inputs input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.performance-inputs button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+.performance-inputs button:hover {
+  background-color: #0056b3;
+}
+
+.save-performance-button {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 2rem;
+}
+
+.save-performance-button:hover {
+  background-color: #218838;
+}
+
+.save-performance-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .session-content {
@@ -108,4 +191,15 @@
   .video-player {
     order: -1; /* Move video to the top on mobile */
   }
+  .performance-row {
+    flex-wrap: wrap; /* Allow items to wrap on small screens */
+  }
+  .performance-row span {
+    width: 100%; /* Take full width on small screens */
+    margin-bottom: 5px;
+  }
+  .performance-inputs input[type="number"] {
+    width: calc(50% - 5px); /* Two inputs per row */
+  }
 }
+

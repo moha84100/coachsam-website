@@ -130,6 +130,10 @@ const ProgramSchema = new mongoose.Schema({
     sets: Number,
     reps: String,
     videoUrl: String,
+    performance: [{
+      reps: Number,
+      weight: Number,
+    }]
   }],
 });
 
@@ -507,6 +511,38 @@ app.put('/api/programs/:id', adminAuth, async (req, res) => {
 
     program = await program.save();
     res.json(program);
+  } catch (err) {
+    logError(err.message);
+    res.status(500).json({ msg: 'Server error' });
+  }
+});
+
+// Update program performance (Authenticated user or Admin)
+app.put('/api/programs/:id/performance', auth, async (req, res) => {
+  const { exercises } = req.body;
+
+  try {
+    let program = await Program.findById(req.params.id);
+
+    if (!program) {
+      return res.status(404).json({ msg: 'Program not found' });
+    }
+
+    // Security check: ensure the program belongs to the user or the requester is an admin
+    if (program.userId.toString() !== req.user.id) {
+      const adminUser = await User.findById(req.user.id);
+      if (!adminUser.isAdmin) {
+        return res.status(403).json({ msg: 'User not authorized to update this program' });
+      }
+    }
+
+    // Update exercises with performance data
+    if (exercises) {
+      program.exercises = exercises;
+    }
+
+    const updatedProgram = await program.save();
+    res.json(updatedProgram);
   } catch (err) {
     logError(err.message);
     res.status(500).json({ msg: 'Server error' });
