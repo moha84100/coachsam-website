@@ -15,7 +15,10 @@ function AvantApres() {
       image: "3.png",
       comment: "je ne pensais pas pouvoir atteindre un tel niveau, mais ce n’est pas fini !"
     },
-    
+    {
+      image: "4.png",
+      comment: "je suis fier d’avoir eu ce parcours, merci coach."
+    },
     {
       image: "5.png",
       comment: "j’ai tellement appris en étant à ces côtés, et mon physique le remercie encore"
