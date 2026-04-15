@@ -384,15 +384,6 @@ h2 {
   box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
-.testimonial-card img {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 1rem;
-  border: 3px solid var(--main-red);
-}
-
 .testimonial-card blockquote {
   font-style: italic;
   margin: 0 0 1rem 0;

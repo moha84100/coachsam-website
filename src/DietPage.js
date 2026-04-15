@@ -79,9 +79,9 @@ const DietPage = ({ isAdmin, token, userId: currentUserId }) => {
   const handleSaveNotes = async (e) => {
     e.preventDefault();
     const fetchToken = localStorage.getItem('token');
-    // Determine if we need to create (POST) or update (PUT)
-    const method = dietNotes ? 'PUT' : 'POST';
-    const url = `${apiUrl}/api/diet/notes`; // POST always goes to /api/diet/notes
+    // Backend uses POST for both creating and updating diet notes
+    const method = 'POST';
+    const url = `${apiUrl}/api/diet/notes`;
 
     try {
       const res = await fetch(url, {
@@ -92,10 +92,17 @@ const DietPage = ({ isAdmin, token, userId: currentUserId }) => {
         },
         body: JSON.stringify({ userId, notes: dietNotes }),
       });
-      if (!res.ok) throw new Error('Could not save diet notes');
+
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        throw new Error(errorData.msg || 'Could not save diet notes');
+      }
+
+      alert('Notes de régime enregistrées avec succès !');
       await fetchDietNotes(); // Re-fetch to ensure consistency
     } catch (err) {
-      setError(err.message);
+      console.error('Save diet notes error:', err);
+      setError(`Erreur lors de l'enregistrement: ${err.message}`);
     }
   };
 

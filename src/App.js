@@ -34,9 +34,8 @@ const AnimatedServiceCard = ({ icon, title, description, buttonText, animationDi
     </div>
   );
 };
-
 // Animated Testimonial Card Component
-const AnimatedTestimonialCard = ({ imgSrc, altText, quote, author, animationDirection }) => {
+const AnimatedTestimonialCard = ({ quote, author, animationDirection }) => {
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.2,
@@ -44,7 +43,6 @@ const AnimatedTestimonialCard = ({ imgSrc, altText, quote, author, animationDire
 
   return (
     <div ref={ref} className={`testimonial-card ${animationDirection} ${inView ? 'is-visible' : ''}`}>
-      <img src={imgSrc} alt={altText} />
       <blockquote>
         "{quote}"
         <cite>- {author}</cite>
@@ -103,74 +101,50 @@ const MainPage = () => {
 
   const testimonials = [
     {
-      imgSrc: "https://placehold.co/300x300",
-      altText: "Grandingo",
       quote: "J'avais tout essayé pour perdre du poids, sans succès. Avec Sam, j'ai perdu 15 kg en 2 mois et, surtout, j'ai appris à aimer le sport. Son approche bienveillante a tout changé !",
       author: "Grandingo, -15 kg"
     },
     {
-      imgSrc: "https://placehold.co/301x301",
-      altText: "Elio",
       quote: "Je voulais prendre de la masse mais je stagnais. Le programme de Sam, allié à ses conseils en nutrition, m'a permis de gagner 8 kg de muscle propre. Un vrai pro !",
       author: "Elio, +8 kg de muscle"
     },
     {
-      imgSrc: "https://placehold.co/302x302",
-      altText: "Mohamed",
       quote: "En tant que coureur, je devais améliorer mon endurance pour un marathon. Sam a structuré ma préparation et m'a permis de passer sous la barre des 3h30. Inestimable.",
       author: "Mohamed, Marathonien"
     },
     {
-      imgSrc: "https://placehold.co/303x303",
-      altText: "Laura",
       quote: "Le coaching de Sam a été une révélation. J'ai non seulement atteint mon objectif de poids, mais j'ai aussi retrouvé une énergie que je ne pensais plus possible. Un grand merci !",
       author: "Laura, -10 kg"
     },
     {
-      imgSrc: "https://placehold.co/304x304",
-      altText: "Julien",
       quote: "Je m'entraînais depuis des années sans voir de réels progrès. Sam a su identifier mes erreurs et m'a créé un programme qui a tout changé. Les résultats sont là !",
       author: "Julien, +5 kg de muscle"
     },
     {
-      imgSrc: "https://placehold.co/305x305",
-      altText: "Sophie",
       quote: "Je détestais courir. Sam m'a appris à aimer ça et j'ai terminé mon premier 10km. Jamais je n'aurais cru ça possible. Son soutien est incroyable.",
       author: "Sophie, Course à pied"
     },
     {
-      imgSrc: "https://placehold.co/306x306",
-      altText: "David",
       quote: "J'ai perdu 20kg en 6 mois. Sam est plus qu'un coach, c'est un véritable partenaire de réussite. Il est toujours là pour vous motiver et vous conseiller.",
       author: "David, -20 kg"
     },
     {
-      imgSrc: "https://placehold.co/307x307",
-      altText: "Chloé",
       quote: "Au-delà de la transformation physique, c'est ma confiance en moi qui a explosé. Les séances avec Sam sont un vrai boost pour le moral.",
       author: "Chloé, Confiance en soi"
     },
     {
-      imgSrc: "https://placehold.co/308x308",
-      altText: "Alexandre",
       quote: "Je préparais un concours sportif et Sam a été essentiel dans ma réussite. Son expertise et sa rigueur m'ont permis d'être au top le jour J.",
       author: "Alexandre, Préparation physique"
     },
     {
-      imgSrc: "https://placehold.co/309x309",
-      altText: "Manon",
       quote: "J'avais peur de ne pas y arriver, mais Sam a su me mettre en confiance. J'ai perdu 8kg et je me sens tellement mieux dans mon corps et dans ma tête.",
       author: "Manon, -8 kg"
     },
     {
-      imgSrc: "https://placehold.co/310x310",
-      altText: "Thomas",
       quote: "Un coach à l'écoute et très professionnel. Il m'a permis de dépasser mes limites et d'atteindre des objectifs que je pensais inaccessibles.",
       author: "Thomas, +7 kg de muscle"
     },
     {
-      imgSrc: "https://placehold.co/311x311",
-      altText: "Elodie",
       quote: "Je cherchais à me remettre en forme après ma grossesse. Sam a été d'une grande aide pour retrouver mon corps et mon énergie. Je le recommande à 100%.",
       author: "Elodie, Bien-être"
     }
@@ -206,7 +180,7 @@ const MainPage = () => {
     <section id="services">
       <h2>Mes solutions</h2>
       <p className="section-intro">
-        Chacune des solutions proposées ci-dessous.
+
         Il n’y a pas de solution meilleure que d’autres, il y en a des + adaptées selon vos besoins.
       </p>
       <div className="services-grid">
@@ -250,8 +224,6 @@ const MainPage = () => {
             <AnimatedTestimonialCard
               key={index}
               animationDirection="from-left"
-              imgSrc={testimonial.imgSrc}
-              altText={testimonial.altText}
               quote={testimonial.quote}
               author={testimonial.author}
             />
@@ -260,6 +232,7 @@ const MainPage = () => {
         <button className="carousel-arrow next" onClick={next}>&#10095;</button>
       </div>
     </section>
+
 
     <section id="booking">
       <h2>Réservez Votre Appel</h2>
