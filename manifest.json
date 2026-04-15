@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Coach Sam",
+  "name": "Coach Sam - Coach Sportif Personnel",
+  "description": "Accompagnement sportif et nutritionnel personnalisé par Coach Sam.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +21,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#c5963f",
+  "background_color": "#000000"
 }
