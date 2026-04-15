@@ -60,7 +60,7 @@ app.post('/send-email', (req, res) => {
     mailOptions = {
       from: `"Coach Sam" <${process.env.EMAIL_USER}>`,
       replyTo: email,
-      to: [process.env.EMAIL_USER, 'samuel.coaching@gmail.com'],
+      to: ['Samuel.coaching.84@gmail.com'],
       subject: `Nouveau message de ${name}`,
       text: message
     };
@@ -72,7 +72,7 @@ app.post('/send-email', (req, res) => {
 
     mailOptions = {
       from: `"Coach Sam" <${process.env.EMAIL_USER}>`,
-      to: [process.env.EMAIL_USER, 'samuel.coaching@gmail.com'],
+      to: ['Samuel.coaching.84@gmail.com'],
       subject: 'Nouveau questionnaire rempli',
       text: emailBody
     };
