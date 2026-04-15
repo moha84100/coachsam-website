@@ -116,7 +116,7 @@ function AvantApres() {
           <img
             key={currentImageIndex} /* Ajout de la clé pour l'animation */
             src={`${process.env.PUBLIC_URL}/images/avant-apres/${transformations[currentImageIndex].image}`}
-            alt={`Avant Après ${currentImageIndex + 1}`}
+            alt={`Transformation physique ${currentImageIndex + 1} - Coach Sam - Avant Après Musculation et Perte de Poids`}
             className="avant-apres-image fade-slide-in"
           />
         </div>

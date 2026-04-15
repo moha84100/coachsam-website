@@ -169,7 +169,7 @@ const MainPage = () => {
       <div className="hero-overlay"></div>
       <div className="hero-content">
         <div className="hero-profile-image-container">
-          <img src={process.env.PUBLIC_URL + "/images/profile_coach_sam.png"} alt="Photo de Coach Sam" />
+          <img src={process.env.PUBLIC_URL + "/images/profile_coach_sam.png"} alt="Coach Sam - Coach Sportif Personnel spécialisé en Musculation et Nutrition" />
         </div>
         <h1>Transformez Votre Vie, Pas Seulement Votre Corps.</h1>
         <p>Rejoignez-moi et devenez la meilleure version de vous-même.</p>
@@ -378,7 +378,7 @@ function App() {
                 <li><Link to="/login" onClick={toggleMenu}>Login</Link></li>
               )}
               
-              <li><Link to="/"><img src={process.env.PUBLIC_URL + "/images/logo.png"} alt="Coach Sam Logo" className="nav-logo" /></Link></li>
+              <li><Link to="/"><img src={process.env.PUBLIC_URL + "/images/logo.png"} alt="Coach Sam - Coach Sportif Personnel" className="nav-logo" /></Link></li>
             </ul>
           </nav>
           <button className="hamburger-menu" onClick={toggleMenu}>
@@ -412,7 +412,7 @@ function App() {
         <footer>
           <div className="footer-content">
             <div className="footer-logo">
-              <img src={process.env.PUBLIC_URL + "/images/logo.png"} alt="Coach Sam Logo" />
+              <img src={process.env.PUBLIC_URL + "/images/logo.png"} alt="Coach Sam - Musculation et Remise en Forme" />
               <p>Transformez Votre Vie, Pas Seulement Votre Corps.</p>
             </div>
             <div className="footer-links">
