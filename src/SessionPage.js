@@ -155,7 +155,10 @@ const SessionPage = () => {
                 <div className="exercise-card-header">
                   <div className="exercise-info">
                     <span className="exercise-name">{ex.name}</span>
-                    <span className="exercise-details">{ex.sets} séries de {ex.reps}</span>
+                    <span className="exercise-details">
+                      {ex.sets} séries de {ex.reps}
+                      {ex.restTime && <span className="rest-time"> • Repos : {ex.restTime}</span>}
+                    </span>
                   </div>
                   {ex.videoUrl && (
                     <button className="video-toggle-button" onClick={() => handleVideoToggle(exIndex)} title="Voir la vidéo">

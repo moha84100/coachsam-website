@@ -30,7 +30,7 @@ const ProgramEditModal = ({ isOpen, onClose, onSave, onDelete, program, date }) 
         title: '',
         description: '',
         isRestDay: false,
-        exercises: [{ name: '', sets: '', reps: '', videoUrl: '', muscleGroup: '' }],
+        exercises: [{ name: '', sets: '', reps: '', restTime: '', videoUrl: '', muscleGroup: '' }],
       });
       // Reset recurrence states for new programs
       setIsRecurring(false);
@@ -70,7 +70,7 @@ const ProgramEditModal = ({ isOpen, onClose, onSave, onDelete, program, date }) 
   const addExercise = () => {
     setFormData(prev => ({
       ...prev,
-      exercises: [...prev.exercises, { name: '', sets: '', reps: '', videoUrl: '', muscleGroup: '' }],
+      exercises: [...prev.exercises, { name: '', sets: '', reps: '', restTime: '', videoUrl: '', muscleGroup: '' }],
     }));
   };
 
@@ -189,6 +189,7 @@ const ProgramEditModal = ({ isOpen, onClose, onSave, onDelete, program, date }) 
 
                   <input type="number" name="sets" placeholder="Séries" value={ex.sets} onChange={(e) => handleExerciseChange(index, 'sets', e.target.value)} />
                   <input type="text" name="reps" placeholder="Répétitions" value={ex.reps} onChange={(e) => handleExerciseChange(index, 'reps', e.target.value)} />
+                  <input type="text" name="restTime" placeholder="Repos (min)" value={ex.restTime} onChange={(e) => handleExerciseChange(index, 'restTime', e.target.value)} />
                   <input type="text" name="videoUrl" placeholder="URL Vidéo" value={ex.videoUrl} readOnly />
 
                   <button type="button" className="remove-exercise-btn" onClick={() => removeExercise(index)}>X</button>

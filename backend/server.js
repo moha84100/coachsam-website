@@ -129,6 +129,7 @@ const ProgramSchema = new mongoose.Schema({
     category: String,
     sets: Number,
     reps: String,
+    restTime: String, // Nouveau champ pour le temps de récupération
     videoUrl: String,
     performance: [{
       reps: Number,
