@@ -10,6 +10,7 @@ const SessionPage = () => {
   const [error, setError] = useState(null);
   const [visibleVideo, setVisibleVideo] = useState(null); // State to track which video is visible
   const [exercisePerformance, setExercisePerformance] = useState({});
+  const [previousPerformances, setPreviousPerformances] = useState({});
 
   useEffect(() => {
     const fetchSession = async () => {
@@ -21,15 +22,43 @@ const SessionPage = () => {
       }
 
       try {
+        // Fetch current session
         const res = await fetch(`${apiUrl}/api/programs/${programId}`, {
           headers: { 'x-auth-token': token },
         });
         if (!res.ok) throw new Error('Impossible de charger la séance.');
-        const data = await res.json();
-        setSession(data);
+        const currentData = await res.json();
+        setSession(currentData);
+
+        // Fetch all user sessions to find previous performance
+        const allRes = await fetch(`${apiUrl}/api/programs`, {
+          headers: { 'x-auth-token': token },
+        });
+        if (allRes.ok) {
+          const allPrograms = await allRes.json();
+          
+          // Sort programs by date descending to find the most recent one before current
+          const sortedPrograms = allPrograms
+            .filter(p => p._id !== programId && new Date(p.date) < new Date(currentData.date))
+            .sort((a, b) => new Date(b.date) - new Date(a.date));
+
+          const prevPerfs = {};
+          currentData.exercises.forEach((ex, exIndex) => {
+            // Find the last session that included this exercise name
+            const lastSessionWithExercise = sortedPrograms.find(p => 
+              p.exercises && p.exercises.some(prevEx => prevEx.name === ex.name && prevEx.performance && prevEx.performance.length > 0)
+            );
+
+            if (lastSessionWithExercise) {
+              const prevEx = lastSessionWithExercise.exercises.find(pe => pe.name === ex.name);
+              prevPerfs[exIndex] = prevEx.performance;
+            }
+          });
+          setPreviousPerformances(prevPerfs);
+        }
 
         const initialPerformance = {};
-        data.exercises.forEach((ex, index) => {
+        currentData.exercises.forEach((ex, index) => {
           initialPerformance[index] = ex.performance && ex.performance.length > 0
             ? ex.performance.map(p => ({ reps: p.reps || '', weight: p.weight || '' }))
             : Array.from({ length: ex.sets || 1 }, () => ({ reps: '', weight: '' }));
