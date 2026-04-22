@@ -9,6 +9,8 @@ import Questionnaire from './Questionnaire';
 import Contact from './Contact';
 import AvantApres from './AvantApres';
 import LoginPage from './LoginPage';
+import ForgotPassword from './ForgotPassword';
+import ResetPassword from './ResetPassword';
 import RegisterPage from './RegisterPage';
 import ProfilePage from './ProfilePage';
 import AdminPage from './AdminPage';
@@ -411,6 +413,8 @@ function App() {
           <Route path="/avant-apres" element={<AvantApres />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/register" element={<RegisterPage />} />
           
           {/* Protected Profile Route */}

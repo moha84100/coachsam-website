@@ -48,6 +48,9 @@ const LoginPage = ({ onLogin }) => {
           />
           <button type="submit">Login</button>
         </form>
+        <p style={{ marginTop: '1rem' }}>
+          <Link to="/forgot-password">Mot de passe oublié ?</Link>
+        </p>
         <p>
           Don't have an account? <Link to="/register">Register here</Link>
         </p>

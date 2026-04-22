@@ -9,6 +9,7 @@ const nodemailer = require('nodemailer');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const fs = require('fs');
+const crypto = require('crypto');
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -113,6 +114,8 @@ const UserSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   isAdmin: { type: Boolean, default: false },
+  resetPasswordToken: String,
+  resetPasswordExpires: Date,
 });
 
 const User = mongoose.model('User', UserSchema);
@@ -260,6 +263,84 @@ app.post('/api/users/login', async (req, res) => {
         res.json({ token });
       }
     );
+  } catch (err) {
+    logError(err.message);
+    res.status(500).json({ msg: 'Server error' });
+  }
+});
+
+// Forgot password
+app.post('/api/users/forgot-password', async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ msg: 'Aucun utilisateur avec cet e-mail.' });
+    }
+
+    const token = crypto.randomBytes(20).toString('hex');
+    user.resetPasswordToken = token;
+    user.resetPasswordExpires = Date.now() + 3600000; // 1 heure
+
+    await user.save();
+
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+      }
+    });
+
+    const resetUrl = `https://moha84100.github.io/coachsam-website/reset-password/${token}`;
+
+    const mailOptions = {
+      from: `"Coach Sam" <${process.env.EMAIL_USER}>`,
+      to: user.email,
+      subject: 'Réinitialisation de votre mot de passe',
+      text: `Vous recevez cet e-mail car vous avez demandé la réinitialisation de votre mot de passe pour votre compte Coach Sam.\n\n` +
+            `Veuillez cliquer sur le lien suivant ou le copier dans votre navigateur pour finaliser le processus :\n\n` +
+            `${resetUrl}\n\n` +
+            `Si vous n'avez pas demandé cela, veuillez ignorer cet e-mail et votre mot de passe restera inchangé.\n`
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        logError(error);
+        res.status(500).json({ msg: 'Une erreur est survenue lors de l\'envoi de l\'e-mail.' });
+      } else {
+        res.status(200).json({ msg: 'E-mail de réinitialisation envoyé avec succès.' });
+      }
+    });
+  } catch (err) {
+    logError(err.message);
+    res.status(500).json({ msg: 'Server error' });
+  }
+});
+
+// Reset password
+app.post('/api/users/reset-password/:token', async (req, res) => {
+  const { password } = req.body;
+
+  try {
+    const user = await User.findOne({
+      resetPasswordToken: req.params.token,
+      resetPasswordExpires: { $gt: Date.now() }
+    });
+
+    if (!user) {
+      return res.status(400).json({ msg: 'Le jeton de réinitialisation est invalide ou a expiré.' });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(password, salt);
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
+
+    await user.save();
+
+    res.status(200).json({ msg: 'Votre mot de passe a été réinitialisé avec succès.' });
   } catch (err) {
     logError(err.message);
     res.status(500).json({ msg: 'Server error' });
