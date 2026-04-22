@@ -215,23 +215,27 @@ const SessionPage = () => {
                     <span>Répétitions</span>
                     <span>Poids (kg)</span>
                   </div>
-                  {exercisePerformance[exIndex]?.map((p, pIndex) => (
-                    <div key={pIndex} className="performance-grid-row">
-                      <span>{pIndex + 1}</span>
-                      <input
-                        type="number"
-                        placeholder="Reps"
-                        value={p.reps}
-                        onChange={(e) => handlePerformanceChange(exIndex, pIndex, 'reps', e.target.value)}
-                      />
-                      <input
-                        type="number"
-                        placeholder="Poids"
-                        value={p.weight}
-                        onChange={(e) => handlePerformanceChange(exIndex, pIndex, 'weight', e.target.value)}
-                      />
-                    </div>
-                  ))}
+                  {exercisePerformance[exIndex]?.map((p, pIndex) => {
+                    // Get previous performance for this specific set if it exists
+                    const prevSet = previousPerformances[exIndex] && previousPerformances[exIndex][pIndex];
+                    return (
+                      <div key={pIndex} className="performance-grid-row">
+                        <span>{pIndex + 1}</span>
+                        <input
+                          type="number"
+                          placeholder={prevSet ? prevSet.reps : "Reps"}
+                          value={p.reps}
+                          onChange={(e) => handlePerformanceChange(exIndex, pIndex, 'reps', e.target.value)}
+                        />
+                        <input
+                          type="number"
+                          placeholder={prevSet ? prevSet.weight : "Poids"}
+                          value={p.weight}
+                          onChange={(e) => handlePerformanceChange(exIndex, pIndex, 'weight', e.target.value)}
+                        />
+                      </div>
+                    );
+                  })}
                   <button onClick={() => addPerformanceRow(exIndex)} className="add-set-button">
                     + Ajouter une série
                   </button>
