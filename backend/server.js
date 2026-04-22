@@ -47,13 +47,14 @@ const logError = (error) => {
 
 // Transporter configuration
 const createTransporter = () => {
+  console.log(`[SMTP DEBUG] Tentative d'envoi avec l'utilisateur : ${process.env.EMAIL_USER?.trim()}`);
   return nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
     secure: true, // use SSL
     auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS
+      user: process.env.EMAIL_USER?.trim(),
+      pass: process.env.EMAIL_PASS?.trim()
     },
     tls: {
       rejectUnauthorized: false
