@@ -67,8 +67,8 @@ app.post('/send-email', (req, res) => {
   }
 
   const transporter = createTransporter();
-  // ... rest of send-email logic remains similar but uses transporter variable
-});
+
+  let mailOptions;
 
   if (formType === 'contact') {
     const { name, email, message } = formData;
