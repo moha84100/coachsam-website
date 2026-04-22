@@ -177,6 +177,24 @@ const MainPage = () => {
       </div>
     </section>
 
+    <section id="home-avant-apres" className="home-avant-apres">
+      <Link to="/avant-apres" className="avant-apres-link">
+        <div className="avant-apres-preview">
+          <h2>Mes Résultats</h2>
+          <div className="preview-image-container">
+            <img 
+              src={process.env.PUBLIC_URL + "/images/avant-apres/1.png"} 
+              alt="Transformation physique - Coach Sam" 
+              className="preview-image"
+            />
+            <div className="preview-overlay">
+              <span>Voir tous les résultats</span>
+            </div>
+          </div>
+        </div>
+      </Link>
+    </section>
+
     <section id="services">
       <h2>Mes solutions</h2>
       <p className="section-intro">
