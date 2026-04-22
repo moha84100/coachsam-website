@@ -59,6 +59,8 @@ const SessionPage = () => {
 
         const initialPerformance = {};
         currentData.exercises.forEach((ex, index) => {
+          // IMPORTANT: On ne pré-remplit les cases QUE si cette séance précise (currentData) 
+          // a déjà été commencée et enregistrée. Sinon, on laisse vide pour voir le placeholder.
           initialPerformance[index] = ex.performance && ex.performance.length > 0
             ? ex.performance.map(p => ({ reps: p.reps || '', weight: p.weight || '' }))
             : Array.from({ length: ex.sets || 1 }, () => ({ reps: '', weight: '' }));
