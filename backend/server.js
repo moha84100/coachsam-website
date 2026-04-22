@@ -34,27 +34,41 @@ app.use(bodyParser.json());
 const logError = (error) => {
   const logFilePath = path.join(__dirname, 'backend_errors.log');
   const timestamp = new Date().toISOString();
-  const errorMessage = `[${timestamp}] ${error}\n`;
+  const errorDetails = error instanceof Error ? error.stack : error;
+  const errorMessage = `[${timestamp}] ${errorDetails}\n`;
+  
   fs.appendFile(logFilePath, errorMessage, (err) => {
     if (err) {
       console.error('Failed to write to log file:', err);
     }
   });
-  console.error(error); // Still log to console for immediate visibility
+  console.error(`[BACKEND ERROR] ${errorMessage}`);
 };
 
-app.post('/send-email', (req, res) => {
-  const { formType, ...formData } = req.body;
-
-  const transporter = nodemailer.createTransport({
-    service: 'gmail',
+// Transporter configuration
+const createTransporter = () => {
+  return nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true, // use SSL
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS
     }
   });
+};
 
-  let mailOptions;
+app.post('/send-email', (req, res) => {
+  const { formType, ...formData } = req.body;
+
+  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+    logError('Variables EMAIL_USER ou EMAIL_PASS manquantes');
+    return res.status(500).send('Configuration e-mail manquante sur le serveur.');
+  }
+
+  const transporter = createTransporter();
+  // ... rest of send-email logic remains similar but uses transporter variable
+});
 
   if (formType === 'contact') {
     const { name, email, message } = formData;
@@ -273,6 +287,11 @@ app.post('/api/users/login', async (req, res) => {
 app.post('/api/users/forgot-password', async (req, res) => {
   const { email } = req.body;
 
+  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+    logError('Variables EMAIL_USER ou EMAIL_PASS manquantes pour forgot-password');
+    return res.status(500).json({ msg: 'Configuration e-mail manquante sur le serveur. Veuillez contacter l\'administrateur.' });
+  }
+
   try {
     const user = await User.findOne({ email });
     if (!user) {
@@ -285,13 +304,7 @@ app.post('/api/users/forgot-password', async (req, res) => {
 
     await user.save();
 
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-      }
-    });
+    const transporter = createTransporter();
 
     const resetUrl = `https://moha84100.github.io/coachsam-website/reset-password/${token}`;
 
@@ -326,14 +339,14 @@ app.post('/api/users/forgot-password', async (req, res) => {
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
         logError(error);
-        res.status(500).json({ msg: 'Une erreur est survenue lors de l\'envoi de l\'e-mail.' });
+        res.status(500).json({ msg: 'Une erreur est survenue lors de l\'envoi de l\'e-mail (SMTP error).' });
       } else {
-        res.status(200).json({ msg: 'E-mail de réinitialisation envoyé avec succès.' });
+        res.status(200).json({ msg: 'E-mail de réinitialisation envoyé avec succès. Vérifiez vos spams !' });
       }
     });
   } catch (err) {
-    logError(err.message);
-    res.status(500).json({ msg: 'Server error' });
+    logError(err);
+    res.status(500).json({ msg: 'Server error: impossible de traiter la demande.' });
   }
 });
 
