@@ -25,4 +25,9 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url><loc>https://coach-sam.fr/blog/piliers-nutrition-sportive</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://coach-sam.fr/blog/erreurs-nutrition-debutant</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://coach-sam.fr/blog/exercices-poids-du-corps</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://coach-sam.fr/blog/musique-performance-entrainement</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://coach-sam.fr/blog/jours-repos-construction-musculaire</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>
