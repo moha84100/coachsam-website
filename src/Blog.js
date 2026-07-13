@@ -1,34 +1,11 @@
 import React, { useState } from 'react';
-import Modal from 'react-modal';
+import { Link, Navigate, useParams } from 'react-router-dom';
 import './Blog.css';
 
-// --- Modal Custom Styles ---
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    maxWidth: '800px',
-    maxHeight: '80vh',
-    padding: '40px',
-    borderRadius: '15px',
-    border: 'none',
-    boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
-  },
-  overlay: {
-    backgroundColor: 'rgba(0, 0, 0, 0.75)',
-    zIndex: 1100, // Ensure modal is on top
-  },
-};
-
-Modal.setAppElement('#root'); // Accessibility
-
 // --- Articles Data ---
-const articles = [
+export const articles = [
   {
+    slug: 'piliers-nutrition-sportive',
     category: 'Nutrition & Alimentation',
     title: "Les 5 Piliers d'une Nutrition Sportive Réussie",
     summary: "Les bases pour optimiser votre énergie et récupération.",
@@ -43,6 +20,7 @@ const articles = [
     `
   },
   {
+    slug: 'erreurs-nutrition-debutant',
     category: 'Nutrition & Alimentation',
     title: "Les Erreurs de Débutant en Nutrition et Comment les Éviter",
     summary: "Ne laissez pas ces erreurs communes saboter vos efforts.",
@@ -56,6 +34,7 @@ const articles = [
     `
   },
   {
+    slug: 'exercices-poids-du-corps',
     category: 'Entraînement & Performance',
     title: "5 Exercices au Poids du Corps pour un Entraînement Efficace",
     summary: "Pas de salle ? Pas de problème. Des résultats avec zéro matériel.",
@@ -71,6 +50,7 @@ const articles = [
     `
   },
   {
+    slug: 'musique-performance-entrainement',
     category: 'Motivation & Mental',
     title: "La Musique, Votre Partenaire d'Entraînement Ultime",
     summary: "Comment une simple playlist peut booster vos performances.",
@@ -79,6 +59,7 @@ const articles = [
     `
   },
   {
+    slug: 'jours-repos-construction-musculaire',
     category: 'Récupération & Bien-être',
     title: "Le Rôle des Jours de Repos dans la Construction Musculaire",
     summary: "Pourquoi ne rien faire est parfois l'action la plus productive.",
@@ -92,18 +73,6 @@ const categories = ['Tous', ...new Set(articles.map(article => article.category)
 
 function Blog() {
   const [filter, setFilter] = useState('Tous');
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [selectedArticle, setSelectedArticle] = useState(null);
-
-  const openModal = (article) => {
-    setSelectedArticle(article);
-    setModalIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalIsOpen(false);
-    setSelectedArticle(null);
-  };
 
   const filteredArticles = filter === 'Tous' 
     ? articles 
@@ -132,26 +101,31 @@ function Blog() {
             <span className="article-category">{article.category}</span>
             <h3>{article.title}</h3>
             <p>{article.summary}</p>
-            <button onClick={() => openModal(article)} className="read-more">Lire la suite</button>
+            <Link to={`/blog/${article.slug}`} className="read-more">Lire la suite</Link>
           </div>
         ))}
       </div>
 
-      {selectedArticle && (
-        <Modal
-          isOpen={modalIsOpen}
-          onRequestClose={closeModal}
-          style={customStyles}
-          contentLabel="Article Details"
-        >
-          <div className="modal-header">
-            <h2>{selectedArticle.title}</h2>
-            <button onClick={closeModal} className="close-modal-btn">&times;</button>
-          </div>
-          <div className="modal-content" dangerouslySetInnerHTML={{ __html: selectedArticle.fullContent }}></div>
-        </Modal>
-      )}
     </div>
+  );
+}
+
+export function ArticlePage() {
+  const { slug } = useParams();
+  const article = articles.find(item => item.slug === slug);
+  if (!article) return <Navigate to="/404" replace />;
+
+  return (
+    <main className="article-page">
+      <article>
+        <Link to="/#blog" className="article-back">← Retour au blog</Link>
+        <span className="article-category">{article.category}</span>
+        <h1>{article.title}</h1>
+        <p className="article-summary">{article.summary}</p>
+        <div className="article-content" dangerouslySetInnerHTML={{ __html: article.fullContent }} />
+        <Link to="/#booking" className="read-more">Réserver un appel avec Coach Sam</Link>
+      </article>
+    </main>
   );
 }
 

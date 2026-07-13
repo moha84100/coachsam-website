@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Link, useLocation, Navigate } f
 import { InlineWidget } from 'react-calendly';
 import { useInView } from 'react-intersection-observer';
 import './App.css';
-import Blog from './Blog';
+import Blog, { ArticlePage, articles } from './Blog';
 import Outils from './Outils';
 import Questionnaire from './Questionnaire';
 import Contact from './Contact';
@@ -19,6 +19,59 @@ import SessionPage from './SessionPage';
 import BodyMeasurementsPage from './BodyMeasurementsPage';
 import DietPage from './DietPage'; 
 import apiUrl from './apiConfig';
+
+const seoPages = {
+  '/': ['Coach Sam | Coach sportif à Orange, musculation & nutrition', 'Coaching sportif personnalisé à Orange et à distance : musculation, nutrition, perte de poids et préparation physique avec Coach Sam.'],
+  '/outils': ['Outils fitness gratuits | Coach Sam', 'Calculez vos besoins et utilisez les outils fitness de Coach Sam pour mieux structurer votre entraînement et votre nutrition.'],
+  '/questionnaire': ['Questionnaire coaching sportif | Coach Sam', 'Décrivez vos objectifs, votre niveau et vos habitudes pour recevoir un accompagnement sportif personnalisé avec Coach Sam.'],
+  '/avant-apres': ['Transformations avant/après | Coach Sam', 'Découvrez les transformations et résultats obtenus grâce aux accompagnements sportifs et nutritionnels de Coach Sam.'],
+  '/contact': ['Contacter Coach Sam | Coach sportif à Orange', 'Contactez Coach Sam à Orange pour discuter de vos objectifs de remise en forme, musculation, nutrition ou préparation physique.'],
+};
+
+const privatePaths = ['/login', '/register', '/forgot-password', '/reset-password', '/profile', '/admin', '/session'];
+
+function SeoManager() {
+  const location = useLocation();
+
+  useEffect(() => {
+    const article = location.pathname.startsWith('/blog/')
+      ? articles.find(item => `/blog/${item.slug}` === location.pathname)
+      : null;
+    const fallback = ['Coach Sam | Coaching sportif personnalisé', 'Coaching sportif, musculation et nutrition avec Coach Sam à Orange et à distance.'];
+    const [title, description] = article
+      ? [`${article.title} | Coach Sam`, article.summary]
+      : (seoPages[location.pathname] || fallback);
+    const canonicalUrl = `https://coach-sam.fr${location.pathname === '/' ? '/' : location.pathname}`;
+    const isKnownPublicPage = Boolean(seoPages[location.pathname] || article);
+    const noIndex = privatePaths.some(path => location.pathname.startsWith(path)) || !isKnownPublicPage;
+
+    document.title = title;
+    const setMeta = (selector, attribute, value) => {
+      const element = document.querySelector(selector);
+      if (element) element.setAttribute(attribute, value);
+    };
+    setMeta('meta[name="description"]', 'content', description);
+    setMeta('meta[property="og:title"]', 'content', title);
+    setMeta('meta[property="og:description"]', 'content', description);
+    setMeta('meta[property="og:url"]', 'content', canonicalUrl);
+    setMeta('meta[property="twitter:title"]', 'content', title);
+    setMeta('meta[property="twitter:description"]', 'content', description);
+    setMeta('meta[property="twitter:url"]', 'content', canonicalUrl);
+    setMeta('link[rel="canonical"]', 'href', canonicalUrl);
+
+    let robots = document.querySelector('meta[name="robots"]');
+    if (!robots) {
+      robots = document.createElement('meta');
+      robots.name = 'robots';
+      document.head.appendChild(robots);
+    }
+    robots.content = noIndex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large';
+  }, [location.pathname]);
+
+  return null;
+}
+
+const NotFound = () => <main className="not-found"><h1>Page introuvable</h1><p>Cette page n'existe pas.</p><Link to="/">Retour à l'accueil</Link></main>;
 
 // Animated Service Card Component
 const AnimatedServiceCard = ({ icon, title, description, buttonText, animationDirection }) => {
@@ -373,6 +426,7 @@ function App() {
 
   return (
     <Router>
+      <SeoManager />
       <div className="App">
         <header className={`App-header ${scrolled ? 'scrolled' : ''}`}>
           <nav className={`main-nav ${menuOpen ? 'is-open' : ''}`}>
@@ -416,6 +470,7 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/blog/:slug" element={<ArticlePage />} />
           
           {/* Protected Profile Route */}
           <Route path="/profile" element={isAuthenticated ? <ProfilePage isAdmin={isAdmin} token={token} userId={userId} /> : <Navigate to="/login" />} />
@@ -429,6 +484,7 @@ function App() {
 
           {/* Protected Session Route */}
           <Route path="/session/:programId" element={isAuthenticated ? <SessionPage /> : <Navigate to="/login" />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
 
         <footer>
