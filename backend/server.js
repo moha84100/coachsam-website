@@ -16,7 +16,9 @@ const port = process.env.PORT || 3001;
 
 const allowedOrigins = [
   'http://localhost:3000',
-  'https://moha84100.github.io'
+  'https://moha84100.github.io',
+  'https://coach-sam.fr',
+  'https://www.coach-sam.fr'
 ];
 
 app.use(cors({
@@ -114,12 +116,6 @@ app.post('/send-email', (req, res) => {
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-
-// Debugging MONGO_URI
-console.log("--- DEBUGGING ENV VARS ---");
-console.log("NODE_ENV:", process.env.NODE_ENV);
-console.log("MONGO_URI:", process.env.MONGO_URI);
-console.log("--------------------------");
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
@@ -310,7 +306,7 @@ app.post('/api/users/forgot-password', async (req, res) => {
 
     const transporter = createTransporter();
 
-    const resetUrl = `https://moha84100.github.io/coachsam-website/reset-password/${token}`;
+    const resetUrl = `https://coach-sam.fr/reset-password/${token}`;
 
     const mailOptions = {
       from: `"Coach Sam" <${process.env.EMAIL_USER}>`,
@@ -877,5 +873,4 @@ app.listen(port, () => {
   console.log(`Serveur en écoute sur le port ${port}`);
 
 });
-
 

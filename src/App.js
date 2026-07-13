@@ -372,7 +372,7 @@ function App() {
   };
 
   return (
-    <Router basename="/coachsam-website">
+    <Router>
       <div className="App">
         <header className={`App-header ${scrolled ? 'scrolled' : ''}`}>
           <nav className={`main-nav ${menuOpen ? 'is-open' : ''}`}>
